@@ -1,0 +1,30 @@
+name: galli_map
+description: A Galli map widget that displays a map with custom markers, lines, circles and polygons. 
+version: 1.0.3
+homepage: https://www.gallimaps.com
+
+environment:
+  sdk: '>=2.12.0<4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^0.13.5
+  flutter_svg: ^2.0.5
+  flutter_map: ^3.1.0
+  latlong2: ^0.8.1
+  geolocator: ^9.0.2
+  flutter_compass: ^0.7.0
+  cached_network_image: ^3.2.3
+  panorama: ^0.4.1
+  flutter_map_marker_cluster: ^1.1.0
+  device_preview: ^1.1.0
+
+
+
+
+
+dev_dependencies:
+
+flutter:
