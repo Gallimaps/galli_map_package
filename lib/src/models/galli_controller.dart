@@ -17,5 +17,4 @@ class GalliController {
   });
 }
 
-final GalliController galliController =
-    GalliController(authKey: "89a40903-b75a-46b6-822b-86eebad4fa36");
+final GalliController galliController = GalliController(authKey: "key");

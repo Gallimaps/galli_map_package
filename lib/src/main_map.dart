@@ -343,53 +343,59 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                     width: widget.width ?? MediaQuery.of(context).size.width,
                     height: widget.height ?? MediaQuery.of(context).size.height,
                     color: Colors.white,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 64,
-                          ),
-                          for (AutoCompleteModel autoCompleteData
-                              in autocompleteResults)
-                            GestureDetector(
-                              onTap: () async {
-                                if (widget.search!.onTapAutoComplete != null) {
-                                  await widget.search!
-                                      .onTapAutoComplete!(autoCompleteData);
-                                }
-                                showSearch = false;
-                                autocompleteResults = [];
-                                _search.text = autoCompleteData.name!;
-                                if (!mounted) {
-                                  return;
-                                }
-                                setState(() {});
-                                FocusManager.instance.primaryFocus?.unfocus();
-                              },
-                              child: Container(
-                                margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                                decoration: BoxDecoration(
-                                    border: Border(
-                                        bottom: BorderSide(
-                                            color: widget.search!.iconColor ??
-                                                Colors.orange))),
-                                child: ListTile(
-                                  horizontalTitleGap: 0,
-                                  minLeadingWidth: 48,
-                                  leading: Icon(
-                                    Icons.location_on,
-                                    color: widget.search!.iconColor ??
-                                        Colors.orange,
-                                  ),
-                                  title: Text(
-                                    autoCompleteData.name ?? "null",
-                                    style: const TextStyle(
-                                        fontSize: 14, color: Color(0xff454545)),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 64,
+                            ),
+                            for (AutoCompleteModel autoCompleteData
+                                in autocompleteResults)
+                              GestureDetector(
+                                onTap: () async {
+                                  if (widget.search!.onTapAutoComplete !=
+                                      null) {
+                                    await widget.search!
+                                        .onTapAutoComplete!(autoCompleteData);
+                                  }
+                                  showSearch = false;
+                                  autocompleteResults = [];
+                                  _search.text = autoCompleteData.name!;
+                                  if (!mounted) {
+                                    return;
+                                  }
+                                  setState(() {});
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                },
+                                child: Container(
+                                  margin:
+                                      const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                                  decoration: BoxDecoration(
+                                      border: Border(
+                                          bottom: BorderSide(
+                                              color: widget.search!.iconColor ??
+                                                  Colors.orange))),
+                                  child: ListTile(
+                                    horizontalTitleGap: 0,
+                                    minLeadingWidth: 48,
+                                    leading: Icon(
+                                      Icons.location_on,
+                                      color: widget.search!.iconColor ??
+                                          Colors.orange,
+                                    ),
+                                    title: Text(
+                                      autoCompleteData.name ?? "null",
+                                      style: const TextStyle(
+                                          fontSize: 14,
+                                          color: Color(0xff454545)),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
