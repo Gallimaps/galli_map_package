@@ -5,7 +5,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:galli_map/src/functions/encrption.dart';
 import 'package:galli_map/src/static/url.dart';
-import 'package:panorama/panorama.dart';
+
+import '../../panaroma/panaroma.dart';
 
 /// A widget that displays a panoramic image at the specified coordinates,
 /// with optional markers and interactive features.

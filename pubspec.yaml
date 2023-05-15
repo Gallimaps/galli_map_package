@@ -17,10 +17,10 @@ dependencies:
   geolocator: ^9.0.2
   flutter_compass: ^0.7.0
   cached_network_image: ^3.2.3
-  panorama: ^0.4.1
   flutter_map_marker_cluster: ^1.1.0
   device_preview: ^1.1.0
-
+  flutter_cube: ^0.1.1
+  motion_sensors: ^0.1.0
 
 
 
