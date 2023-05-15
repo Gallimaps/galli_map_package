@@ -20,7 +20,8 @@ dependencies:
   flutter_map_marker_cluster: ^1.1.0
   device_preview: ^1.1.0
   flutter_cube: ^0.1.1
-  motion_sensors: ^0.1.0
+
+  galli_motion_sensors: ^0.0.2
 
 
 

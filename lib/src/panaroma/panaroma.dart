@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
-import 'package:motion_sensors/motion_sensors.dart';
+import 'package:galli_motion_sensors/galli_motion_sensors.dart';
 
 enum SensorControl {
   /// No sensor used.
@@ -296,17 +296,17 @@ class _PanoramaState extends State<Panorama>
     _orientationSubscription?.cancel();
     switch (widget.sensorControl) {
       case SensorControl.Orientation:
-        motionSensors.orientationUpdateInterval =
+        gallimotionSensors.orientationUpdateInterval =
             Duration.microsecondsPerSecond ~/ 60;
         _orientationSubscription =
-            motionSensors.orientation.listen((OrientationEvent event) {
+            gallimotionSensors.orientation.listen((OrientationEvent event) {
           orientation.setValues(event.yaw, event.pitch, event.roll);
         });
         break;
       case SensorControl.AbsoluteOrientation:
-        motionSensors.absoluteOrientationUpdateInterval =
+        gallimotionSensors.absoluteOrientationUpdateInterval =
             Duration.microsecondsPerSecond ~/ 60;
-        _orientationSubscription = motionSensors.absoluteOrientation
+        _orientationSubscription = gallimotionSensors.absoluteOrientation
             .listen((AbsoluteOrientationEvent event) {
           orientation.setValues(event.yaw, event.pitch, event.roll);
         });
@@ -316,7 +316,7 @@ class _PanoramaState extends State<Panorama>
 
     _screenOrientSubscription?.cancel();
     if (widget.sensorControl != SensorControl.None) {
-      _screenOrientSubscription = motionSensors.screenOrientation
+      _screenOrientSubscription = gallimotionSensors.screenOrientation
           .listen((ScreenOrientationEvent event) {
         screenOrientation = radians(event.angle!);
       });
@@ -599,7 +599,7 @@ Mesh generateSphereMesh(
 
 Vector3 quaternionToOrientation(Quaternion q) {
   // final Matrix4 m = Matrix4.compose(Vector3.zero(), q, Vector3.all(1.0));
-  // final Vector v = motionSensors.getOrientation(m);
+  // final Vector v = gallimotionSensors.getOrientation(m);
   // return Vector3(v.z, v.y, v.x);
   final storage = q.storage;
   final double x = storage[0];

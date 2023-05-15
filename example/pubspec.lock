@@ -244,6 +244,14 @@ packages:
       relative: true
     source: path
     version: "1.0.3"
+  galli_motion_sensors:
+    dependency: transitive
+    description:
+      name: galli_motion_sensors
+      sha256: aaf3c458bd2b8f4c8d4d4148c98fa665f0bf71582e3741224f3823d762d81192
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   geolocator:
     dependency: transitive
     description:
@@ -388,14 +396,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  motion_sensors:
-    dependency: transitive
-    description:
-      name: motion_sensors
-      sha256: "4e2734a76cd6da633013bcdc68a9efe9fbbcff906e6d6c45040932edda3fa5d6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.0"
   nested:
     dependency: transitive
     description:
