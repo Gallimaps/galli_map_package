@@ -77,3 +77,7 @@
 ## 1.0.7
 
 * added Search Query with distance
+
+## 1.0.8
+
+* updated API
