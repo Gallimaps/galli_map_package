@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:example/key_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:device_preview/device_preview.dart';
@@ -35,19 +38,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: "key",
+    authKey: KeyConstant.key,
     zoom: 16,
-    maxZoom: 18,
+    maxZoom: 22,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods("key");
+  final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
 
   final Three60Marker three60Marker = Three60Marker(
     on360MarkerTap: () {},
   );
   final ViewerClass viewer = ViewerClass(
     viewer: Viewer(
-        accessToken: "key",
+        accessToken: KeyConstant.key,
         pinIcon: const Icon(
           Icons.circle,
           size: 48,
@@ -87,109 +90,127 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         width: MediaQuery.of(context).size.width,
         child: GalliMap(
           controller: controller,
-          onMapLoadComplete: (controller) async {
-            galliMethods.animateMapMove(
-                LatLng(27.709857, 85.339195), 18, this, mounted, controller);
+          onTap: (_) async {
+            HouseModel? house = await galliMethods.reverse(_);
+            log("${house!.toJson()}");
           },
-          showCurrentLocation: true,
-          onTap: (tap) {
-            galliMethods.reverse(tap);
-          },
-          onMapUpdate: (event) {},
-          circles: [
-            GalliCircle(
-                center: LatLng(28.684222, 85.303778),
-                radius: 40,
-                color: Colors.white,
-                borderStroke: 3,
-                borderColor: Colors.black)
-          ],
-          lines: [
-            GalliLine(
-                line: [
-                  LatLng(27.684222, 85.303778),
-                  LatLng(27.684246, 85.303780),
-                  LatLng(27.684222, 85.303790),
-                  LatLng(27.684230, 85.303778),
-                ],
-                borderColor: Colors.blue,
-                borderStroke: 2,
-                lineColor: Colors.white,
-                lineStroke: 2)
-          ],
-          polygons: [
-            GalliPolygon(
-              polygon: [
-                LatLng(27.684222, 85.303778),
-                LatLng(27.684246, 85.303780),
-                LatLng(27.684222, 85.303790),
-                LatLng(27.684290, 85.303754),
-              ],
-              borderColor: Colors.red,
-              borderStroke: 2,
-              color: Colors.green,
-            ),
-          ],
-          markerClusterWidget: (context, list) {
-            return Container(
-              width: 20,
-              height: 20,
-              color: Colors.red,
-              child: Center(
-                child: Text(list.length.toString()),
-              ),
-            );
-          },
-          markers: [
-            GalliMarker(
-                latlng: LatLng(27.686222, 85.30134),
-                anchor: Anchor.top,
-                markerWidget: const Icon(
-                  Icons.location_history,
-                  color: Colors.black,
-                  size: 48,
-                )),
-            GalliMarker(
-                latlng: LatLng(27.684222, 85.30144),
-                anchor: Anchor.top,
-                markerWidget: const Icon(
-                  Icons.location_history,
-                  color: Colors.black,
-                  size: 48,
-                )),
-            GalliMarker(
-                latlng: LatLng(27.684122, 85.30135),
-                anchor: Anchor.top,
-                markerWidget: const Icon(
-                  Icons.location_history,
-                  color: Colors.black,
-                  size: 48,
-                )),
-            GalliMarker(
-                latlng: LatLng(27.684212, 85.30194),
-                anchor: Anchor.top,
-                markerWidget: const Icon(
-                  Icons.location_history,
-                  color: Colors.black,
-                  size: 48,
-                )),
-            GalliMarker(
-                latlng: LatLng(27.684221, 85.30134),
-                anchor: Anchor.top,
-                markerWidget: const Icon(
-                  Icons.location_history,
-                  color: Colors.black,
-                  size: 48,
-                )),
-          ],
+          // onTap: (_) {
+          //   galliMethods.reverse(_);
+          //   galliMethods.search("well", _);
+          //   galliMethods.getCurrentLocation();
+          //   galliMethods.getRoute(
+          //       source: _, destination: LatLng(81.5925407, 28.056345));
+          //   galliMethods.streamCurrentLocation();
+          //   galliMethods.autoComplete("see");
+          //   galliMethods.get360ImagePoints(controller.map);
+          // },
+          // onMapLoadComplete: (controller) async {
+          // galliMethods.animateMapMove(LatLng(27.709857, 85.339195), 18,
+          //     this, mounted, controller);
+          // },
+          // showCurrentLocation: true,
+          // onTap: (tap) {
+          //   galliMethods.reverse(tap);
+          // },
+          // onMapUpdate: (event) {},
+          // circles: [
+          //   GalliCircle(
+          //       center: LatLng(28.684222, 85.303778),
+          //       radius: 40,
+          //       color: Colors.white,
+          //       borderStroke: 3,
+          //       borderColor: Colors.black)
+          // ],
+          // lines: [
+          //   GalliLine(
+          //       line: [
+          //         LatLng(27.684222, 85.303778),
+          //         LatLng(27.684246, 85.303780),
+          //         LatLng(27.684222, 85.303790),
+          //         LatLng(27.684230, 85.303778),
+          //       ],
+          //       borderColor: Colors.blue,
+          //       borderStroke: 2,
+          //       lineColor: Colors.white,
+          //       lineStroke: 2)
+          // ],
+          // polygons: [
+          //   GalliPolygon(
+          //     polygon: [
+          //       LatLng(27.684222, 85.303778),
+          //       LatLng(27.684246, 85.303780),
+          //       LatLng(27.684222, 85.303790),
+          //       LatLng(27.684290, 85.303754),
+          //     ],
+          //     borderColor: Colors.red,
+          //     borderStroke: 2,
+          //     color: Colors.green,
+          //   ),
+          // ],
+          // markerClusterWidget: (context, list) {
+          //   return Container(
+          //     width: 20,
+          //     height: 20,
+          //     color: Colors.red,
+          //     child: Center(
+          //       child: Text(list.length.toString()),
+          //     ),
+          //   );
+          // },
+          // markers: [
+          //   GalliMarker(
+          //       latlng: LatLng(27.686222, 85.30134),
+          //       anchor: Anchor.top,
+          //       markerWidget: const Icon(
+          //         Icons.location_history,
+          //         color: Colors.black,
+          //         size: 48,
+          //       )),
+          //   GalliMarker(
+          //       latlng: LatLng(27.684222, 85.30144),
+          //       anchor: Anchor.top,
+          //       markerWidget: const Icon(
+          //         Icons.location_history,
+          //         color: Colors.black,
+          //         size: 48,
+          //       )),
+          //   GalliMarker(
+          //       latlng: LatLng(27.684122, 85.30135),
+          //       anchor: Anchor.top,
+          //       markerWidget: const Icon(
+          //         Icons.location_history,
+          //         color: Colors.black,
+          //         size: 48,
+          //       )),
+          //   GalliMarker(
+          //       latlng: LatLng(27.684212, 85.30194),
+          //       anchor: Anchor.top,
+          //       markerWidget: const Icon(
+          //         Icons.location_history,
+          //         color: Colors.black,
+          //         size: 48,
+          //       )),
+          //   GalliMarker(
+          //       latlng: LatLng(27.684221, 85.30134),
+          //       anchor: Anchor.top,
+          //       markerWidget: const Icon(
+          //         Icons.location_history,
+          //         color: Colors.black,
+          //         size: 48,
+          //       )),
+          // ],
           children: [
             Positioned(
                 top: 64,
                 right: 64,
                 child: GestureDetector(
                   onTap: () async {
-                    galliMethods.animateMapMove(LatLng(28.684222, 85.303778),
-                        16, this, mounted, controller.map);
+                    // galliMethods.animateMapMove(LatLng(28.684222, 85.303778),
+                    //     16, this, mounted, controller.map);
+                    HouseModel? yellow = await galliMethods
+                        .reverse(LatLng(27.670501796127244, 85.31188822430165));
+
+                    log("demo page ko ${yellow!.toJson()}");
                   },
                   child: Container(
                     width: 32,

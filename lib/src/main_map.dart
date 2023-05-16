@@ -297,7 +297,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                                 .size
                                                 .height,
                                             child: Stack(children: [
-                                              widget.viewer!.viewer == null
+                                              widget.viewer?.viewer == null
                                                   ? Viewer(
                                                       image: data,
                                                       accessToken: widget
