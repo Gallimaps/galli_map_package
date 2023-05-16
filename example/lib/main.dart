@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:example/key_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:device_preview/device_preview.dart';
@@ -38,18 +35,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: KeyConstant.key,
+    authKey: "key",
     zoom: 16,
     maxZoom: 18,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
+  final GalliMethods galliMethods = GalliMethods("key");
   final Three60Marker three60Marker = Three60Marker(
     on360MarkerTap: () {},
   );
   final ViewerClass viewer = ViewerClass(
     viewer: Viewer(
-        accessToken: KeyConstant.key,
+        accessToken: "key",
         pinIcon: const Icon(
           Icons.abc,
           size: 48,
