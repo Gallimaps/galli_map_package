@@ -81,3 +81,7 @@
 ## 1.0.8
 
 * updated API
+
+## 1.0.9
+
+* updated motion sensor
