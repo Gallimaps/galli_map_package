@@ -141,7 +141,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    galliMethods = GalliMethods(galliController.authKey);
+    galliMethods = GalliMethods(widget.controller.authKey);
     locationaServicesInitiate();
     super.initState();
   }
@@ -156,7 +156,8 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
     return SizedBox(
       width: widget.width ?? MediaQuery.of(context).size.width,
       height: widget.height ?? MediaQuery.of(context).size.height,
-      child: currentLocation == null && galliController.initialPosition == null
+      child: currentLocation == null &&
+              widget.controller.initialPosition == null
           ? const Center(
               child: CircularProgressIndicator(
                 color: Color(0xff454545),
@@ -208,16 +209,18 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                     }
                   },
                   interactiveFlags: InteractiveFlag.all,
-                  center: galliController.initialPosition ?? center,
-                  maxZoom: galliController.maxZoom,
-                  minZoom: galliController.minZoom,
-                  zoom: galliController.zoom),
+                  center: widget.controller.initialPosition ?? center,
+                  maxZoom: (widget.controller.maxZoom < 22)
+                      ? widget.controller.maxZoom
+                      : 22,
+                  minZoom: widget.controller.minZoom,
+                  zoom: widget.controller.zoom),
               children: [
                 TileLayer(
                   tms: true,
                   tileProvider: CachedTileProvider(),
                   urlTemplate:
-                      "https://map-init.gallimap.com/geoserver/gwc/service/tms/1.0.0/GalliMaps%3AClean@EPSG%3A3857@png/{z}/{x}/{y}.png?accessToken=${galliController.authKey}",
+                      "https://map-init.gallimap.com/geoserver/gwc/service/tms/1.0.0/GalliMaps%3AClean@EPSG%3A3857@png/{z}/{x}/{y}.png?accessToken=${widget.controller.authKey}",
                 ),
                 PolylineLayer(polylines: [
                   for (GalliLine line in widget.lines) line.toPolyline(),
@@ -262,9 +265,8 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                               widget.viewer!.viewer == null
                                                   ? Viewer(
                                                       image: data,
-                                                      accessToken:
-                                                          galliController
-                                                              .authKey,
+                                                      accessToken: widget
+                                                          .controller.authKey,
                                                     )
                                                   : widget.viewer!
                                                               .viewerPosition ==
@@ -378,20 +380,25 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                               color: widget.search!.iconColor ??
                                                   Colors.orange))),
                                   child: ListTile(
-                                    horizontalTitleGap: 0,
-                                    minLeadingWidth: 48,
-                                    leading: Icon(
-                                      Icons.location_on,
-                                      color: widget.search!.iconColor ??
-                                          Colors.orange,
-                                    ),
-                                    title: Text(
-                                      autoCompleteData.name ?? "null",
-                                      style: const TextStyle(
-                                          fontSize: 14,
-                                          color: Color(0xff454545)),
-                                    ),
-                                  ),
+                                      horizontalTitleGap: 0,
+                                      minLeadingWidth: 48,
+                                      leading: Icon(
+                                        Icons.location_on,
+                                        color: widget.search!.iconColor ??
+                                            Colors.orange,
+                                      ),
+                                      title: Text(
+                                        autoCompleteData.name ?? "null",
+                                        style: const TextStyle(
+                                            fontSize: 14,
+                                            color: Color(0xff454545)),
+                                      ),
+                                      trailing: Text(
+                                        "  ${(autoCompleteData.distance ?? 0.0).toStringAsFixed(2)} KM",
+                                        style: TextStyle(
+                                            color: Color(0xff454545),
+                                            fontWeight: FontWeight.w500),
+                                      )),
                                 ),
                               ),
                           ],

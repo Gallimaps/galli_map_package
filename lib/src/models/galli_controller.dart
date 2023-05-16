@@ -16,5 +16,3 @@ class GalliController {
     this.initialPosition,
   });
 }
-
-final GalliController galliController = GalliController(authKey: "key");

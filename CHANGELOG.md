@@ -61,3 +61,15 @@
 ## 1.0.3
 
 * minor bug fix
+
+## 1.0.4
+
+* added updated motion sensors
+
+## 1.0.5
+
+* updated keys
+
+## 1.0.6
+
+* logs

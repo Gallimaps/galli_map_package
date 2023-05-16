@@ -34,7 +34,7 @@ class GalliMethods {
     if (response != [] && response != null) {
       List<FeatureModel> features = [];
       var datas = jsonDecode(response)["data"]["features"];
-      log(datas);
+      // log(datas);
       for (var data in datas) {
         FeatureModel featureData = FeatureModel.fromJson(data);
         features.add(featureData);
@@ -48,7 +48,7 @@ class GalliMethods {
   Future<HouseModel?> reverse(LatLng latLng) async {
     var response = await geoApi.get(
         galliUrl.reverseGeoCode(latLng, accessToken), accessToken);
-    log(response);
+    // log(response);
     if (response != null) {
       var data = jsonDecode(response);
       List<LatLng> coord = [];
@@ -64,7 +64,7 @@ class GalliMethods {
         coordinate: coord,
         center: latLng,
       );
-      log("$house");
+      // log("$house");
       return house;
     } else {
       return null;
@@ -146,7 +146,7 @@ class GalliMethods {
     final zoomTween = Tween<double>(begin: mapController.zoom, end: destZoom);
     if (!mounted) return;
     var controller = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: vsync);
+        duration: const Duration(milliseconds: 1000), vsync: vsync);
     Animation<double> animation =
         CurvedAnimation(parent: controller, curve: Curves.decelerate);
     controller.addListener(() {
@@ -170,7 +170,7 @@ class GalliMethods {
     final rotateTween = Tween<double>(begin: mapController.rotation, end: 0.0);
     if (!mounted) return;
     var controller = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: vsync);
+        duration: const Duration(milliseconds: 1000), vsync: vsync);
     Animation<double> animation =
         CurvedAnimation(parent: controller, curve: Curves.decelerate);
     controller.addListener(() {
