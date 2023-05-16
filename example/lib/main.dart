@@ -1,4 +1,3 @@
-import 'package:example/key_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:device_preview/device_preview.dart';
@@ -36,20 +35,21 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: KeyConstant.key,
+    authKey: "key",
     zoom: 16,
     maxZoom: 18,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
+  final GalliMethods galliMethods = GalliMethods("key");
+
   final Three60Marker three60Marker = Three60Marker(
     on360MarkerTap: () {},
   );
   final ViewerClass viewer = ViewerClass(
     viewer: Viewer(
-        accessToken: KeyConstant.key,
+        accessToken: "key",
         pinIcon: const Icon(
-          Icons.abc,
+          Icons.circle,
           size: 48,
         ),
         animSpeed: 2,
@@ -86,11 +86,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: GalliMap(
-          onMapLoadComplete: (controller) async {
-            // galliMethods.animateMapMove(LatLng(27.709857, 85.339195), 18,
-            //     this, mounted, controller);
-          },
           controller: controller,
+          onMapLoadComplete: (controller) async {
+            galliMethods.animateMapMove(
+                LatLng(27.709857, 85.339195), 18, this, mounted, controller);
+          },
           showCurrentLocation: true,
           onTap: (tap) {
             galliMethods.reverse(tap);
@@ -104,9 +104,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 borderStroke: 3,
                 borderColor: Colors.black)
           ],
-          search: search,
-          viewer: viewer,
-          three60marker: three60Marker,
           lines: [
             GalliLine(
                 line: [
@@ -190,7 +187,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 top: 64,
                 right: 64,
                 child: GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     galliMethods.animateMapMove(LatLng(28.684222, 85.303778),
                         16, this, mounted, controller.map);
                   },

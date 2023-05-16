@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:galli_map/src/static/url.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,7 +22,6 @@ class GalliApi {
             'Error', 408); // Request Timeout response status code
       },
     );
-    log(response.body);
     if (response.statusCode == 200) {
       return response.body;
     } else {

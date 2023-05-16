@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:galli_map/galli_map.dart';
@@ -34,7 +33,6 @@ class GalliMethods {
     if (response != [] && response != null) {
       List<FeatureModel> features = [];
       var datas = jsonDecode(response)["data"]["features"];
-      // log(datas);
       for (var data in datas) {
         FeatureModel featureData = FeatureModel.fromJson(data);
         features.add(featureData);
@@ -48,9 +46,8 @@ class GalliMethods {
   Future<HouseModel?> reverse(LatLng latLng) async {
     var response = await geoApi.get(
         galliUrl.reverseGeoCode(latLng, accessToken), accessToken);
-    // log(response);
     if (response != null) {
-      var data = jsonDecode(response);
+      var data = jsonDecode(response)["data"];
       List<LatLng> coord = [];
       if (data["houseCoords"] != null) {
         data['houseCoords'][0][0].forEach((v) {
@@ -64,7 +61,6 @@ class GalliMethods {
         coordinate: coord,
         center: latLng,
       );
-      // log("$house");
       return house;
     } else {
       return null;
@@ -94,7 +90,6 @@ class GalliMethods {
         galliUrl.get360Points(mapController.bounds!.southWest!,
             mapController.bounds!.northEast!, mapController.zoom, accessToken),
         accessToken);
-    log(three60ImagesString ?? "null");
     List<ImageModel> three60ImageModel = [];
     if (three60ImagesString != null) {
       List three60Images =

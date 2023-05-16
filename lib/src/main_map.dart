@@ -27,7 +27,7 @@ class GalliMap extends StatefulWidget {
   final GalliController controller;
   final SearchClass? search;
   final ViewerClass? viewer;
-  final Three60Marker? three60marker;
+  final Three60Marker three60marker;
   final List<Widget> children;
   final Function(MapController controller)? onMapLoadComplete;
   final Function(MapEvent mapEvent)? onMapUpdate;
@@ -58,11 +58,46 @@ class GalliMap extends StatefulWidget {
       this.markerClusterWidget,
       this.search,
       this.viewer,
-      this.three60marker})
+      this.three60marker = const Three60Marker(
+        three60MarkerSize: 40,
+        show360ImageOnMarkerClick: true,
+        three60Widget: Three60Icon(),
+        on360MarkerTap: null,
+      )})
       : super(key: key);
 
   @override
   State<GalliMap> createState() => _GalliMapState();
+}
+
+class Three60Icon extends StatelessWidget {
+  const Three60Icon({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10.0),
+      height: 50,
+      width: 50,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            spreadRadius: 1,
+            blurRadius: 1,
+          )
+        ],
+        borderRadius: BorderRadius.circular(30),
+        color: Colors.white,
+      ),
+      child: Icon(
+        Icons.circle,
+        color: Colors.amber,
+      ),
+    );
+  }
 }
 
 class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
@@ -239,17 +274,17 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                   markers: [
                     for (ImageModel image in images)
                       Marker(
-                          height: widget.three60marker!.three60MarkerSize,
+                          height: widget.three60marker.three60MarkerSize,
                           point: LatLng(image.lat!, image.lng!),
                           builder: (_) => GestureDetector(
                                 onTap: () {
                                   String data =
                                       encrypt("${image.folder}/${image.image}");
-                                  if (widget.three60marker!.on360MarkerTap !=
+                                  if (widget.three60marker.on360MarkerTap !=
                                       null) {
-                                    widget.three60marker!.on360MarkerTap!();
+                                    widget.three60marker.on360MarkerTap!();
                                   }
-                                  if (widget.three60marker!
+                                  if (widget.three60marker
                                       .show360ImageOnMarkerClick) {
                                     showDialog(
                                         context: context,
@@ -296,10 +331,9 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                   }
                                 },
                                 child: Container(
-                                  width:
-                                      widget.three60marker!.three60MarkerSize,
+                                  width: widget.three60marker.three60MarkerSize,
                                   height:
-                                      widget.three60marker!.three60MarkerSize,
+                                      widget.three60marker.three60MarkerSize,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       shape: BoxShape.circle,
@@ -357,10 +391,10 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                 in autocompleteResults)
                               GestureDetector(
                                 onTap: () async {
-                                  if (widget.search!.onTapAutoComplete !=
+                                  if (widget.search?.onTapAutoComplete !=
                                       null) {
-                                    await widget.search!
-                                        .onTapAutoComplete!(autoCompleteData);
+                                    await widget.search
+                                        ?.onTapAutoComplete!(autoCompleteData);
                                   }
                                   showSearch = false;
                                   autocompleteResults = [];
@@ -377,14 +411,14 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       border: Border(
                                           bottom: BorderSide(
-                                              color: widget.search!.iconColor ??
+                                              color: widget.search?.iconColor ??
                                                   Colors.orange))),
                                   child: ListTile(
                                       horizontalTitleGap: 0,
                                       minLeadingWidth: 48,
                                       leading: Icon(
                                         Icons.location_on,
-                                        color: widget.search!.iconColor ??
+                                        color: widget.search?.iconColor ??
                                             Colors.orange,
                                       ),
                                       title: Text(
@@ -412,12 +446,11 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                     left: MediaQuery.of(context).size.width * 0.05,
                     child: Material(
                       clipBehavior: Clip.hardEdge,
-                      borderRadius: BorderRadius.circular(
-                          widget.search!.borderRadius ?? 20),
+                      borderRadius: BorderRadius.circular(20),
                       elevation: 4,
                       child: SizedBox(
-                        height: widget.search!.searchHeight ?? 40,
-                        width: widget.search!.searchWidth ??
+                        height: widget.search?.searchHeight ?? 40,
+                        width: widget.search?.searchWidth ??
                             MediaQuery.of(context).size.width * 0.9,
                         child: TextFormField(
                           controller: _search,
@@ -445,13 +478,13 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                             }
                           },
                           decoration: InputDecoration(
-                              hintText: widget.search!.searchHint,
+                              hintText: widget.search?.searchHint,
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all(10.0),
-                                child: widget.search!.suffixWidget ??
+                                child: widget.search?.suffixWidget ??
                                     Icon(
                                       Icons.search,
-                                      color: widget.search!.iconColor ??
+                                      color: widget.search?.iconColor ??
                                           Colors.orange,
                                     ),
                               ),
@@ -478,11 +511,11 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                               width: 20,
                                               height: 20,
                                               child:
-                                                  widget.search!.closeWidget ??
+                                                  widget.search?.closeWidget ??
                                                       Icon(
                                                         Icons.close,
-                                                        color: widget.search!
-                                                                .iconColor ??
+                                                        color: widget.search
+                                                                ?.iconColor ??
                                                             Colors.orange,
                                                         size: 18,
                                                       ),
@@ -499,10 +532,10 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.all(10.0),
-                                        child: widget.search!.backWidget ??
+                                        child: widget.search?.backWidget ??
                                             Icon(
                                               Icons.arrow_back,
-                                              color: widget.search!.iconColor ??
+                                              color: widget.search?.iconColor ??
                                                   Colors.orange,
                                             ),
                                       ),
@@ -512,10 +545,10 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                               focusedBorder: InputBorder.none,
                               enabledBorder: InputBorder.none,
                               contentPadding: const EdgeInsets.only(top: 8)),
-                          cursorColor: widget.search!.cursorColor ??
+                          cursorColor: widget.search?.cursorColor ??
                               const Color(0xff454545),
-                          cursorHeight: widget.search!.cursorHeight ?? 12,
-                          style: widget.search!.textStyle ??
+                          cursorHeight: widget.search?.cursorHeight ?? 12,
+                          style: widget.search?.textStyle ??
                               const TextStyle(
                                 fontSize: 14,
                                 color: Color(0xff454545),
@@ -558,7 +591,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                               setState(() {});
                             }
                           },
-                          child: widget.three60marker!.three60Widget ??
+                          child: widget.three60marker.three60Widget ??
                               Card(
                                   elevation: 4,
                                   color: images.isEmpty
@@ -636,7 +669,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                     child: Center(
                                       child: Icon(
                                         Icons.location_searching_outlined,
-                                        color: widget.search!.iconColor ??
+                                        color: widget.search?.iconColor ??
                                             Colors.orange,
                                       ),
                                     ),
