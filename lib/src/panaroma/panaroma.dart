@@ -3,7 +3,7 @@ import 'dart:ui' as ui;
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
-import 'package:galli_motion_sensors/galli_motion_sensors.dart';
+// import 'package:galli_motion_sensors/galli_motion_sensors.dart';
 
 enum SensorControl {
   /// No sensor used.
@@ -292,36 +292,36 @@ class _PanoramaState extends State<Panorama>
     _streamController.add(null);
   }
 
-  void _updateSensorControl() {
-    _orientationSubscription?.cancel();
-    switch (widget.sensorControl) {
-      case SensorControl.Orientation:
-        gallimotionSensors.orientationUpdateInterval =
-            Duration.microsecondsPerSecond ~/ 60;
-        _orientationSubscription =
-            gallimotionSensors.orientation.listen((OrientationEvent event) {
-          orientation.setValues(event.yaw, event.pitch, event.roll);
-        });
-        break;
-      case SensorControl.AbsoluteOrientation:
-        gallimotionSensors.absoluteOrientationUpdateInterval =
-            Duration.microsecondsPerSecond ~/ 60;
-        _orientationSubscription = gallimotionSensors.absoluteOrientation
-            .listen((AbsoluteOrientationEvent event) {
-          orientation.setValues(event.yaw, event.pitch, event.roll);
-        });
-        break;
-      default:
-    }
+  // void _updateSensorControl() {
+  //   _orientationSubscription?.cancel();
+  //   switch (widget.sensorControl) {
+  //     case SensorControl.Orientation:
+  //       gallimotionSensors.orientationUpdateInterval =
+  //           Duration.microsecondsPerSecond ~/ 60;
+  //       _orientationSubscription =
+  //           gallimotionSensors.orientation.listen((OrientationEvent event) {
+  //         orientation.setValues(event.yaw, event.pitch, event.roll);
+  //       });
+  //       break;
+  //     case SensorControl.AbsoluteOrientation:
+  //       gallimotionSensors.absoluteOrientationUpdateInterval =
+  //           Duration.microsecondsPerSecond ~/ 60;
+  //       _orientationSubscription = gallimotionSensors.absoluteOrientation
+  //           .listen((AbsoluteOrientationEvent event) {
+  //         orientation.setValues(event.yaw, event.pitch, event.roll);
+  //       });
+  //       break;
+  //     default:
+  //   }
 
-    _screenOrientSubscription?.cancel();
-    if (widget.sensorControl != SensorControl.None) {
-      _screenOrientSubscription = gallimotionSensors.screenOrientation
-          .listen((ScreenOrientationEvent event) {
-        screenOrientation = radians(event.angle!);
-      });
-    }
-  }
+  //   _screenOrientSubscription?.cancel();
+  //   if (widget.sensorControl != SensorControl.None) {
+  //     _screenOrientSubscription = gallimotionSensors.screenOrientation
+  //         .listen((ScreenOrientationEvent event) {
+  //       screenOrientation = radians(event.angle!);
+  //     });
+  //   }
+  // }
 
   void _updateTexture(ImageInfo imageInfo, bool synchronousCall) {
     surface?.mesh.texture = imageInfo.image;
@@ -439,7 +439,7 @@ class _PanoramaState extends State<Panorama>
     _streamController = StreamController<Null>.broadcast();
     _stream = _streamController.stream;
 
-    _updateSensorControl();
+    // _updateSensorControl();
 
     _controller = AnimationController(
         duration: Duration(milliseconds: 60000), vsync: this)
@@ -478,9 +478,9 @@ class _PanoramaState extends State<Panorama>
     if (widget.child?.image != oldWidget.child?.image) {
       _loadTexture(widget.child?.image);
     }
-    if (widget.sensorControl != oldWidget.sensorControl) {
-      _updateSensorControl();
-    }
+    // if (widget.sensorControl != oldWidget.sensorControl) {
+    //   _updateSensorControl();
+    // }
   }
 
   @override
