@@ -408,18 +408,8 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                   ),
                 if (widget.showSearch)
                   Positioned(
-                    top: (widget.search!.fromTop != null)
-                        ? widget.search!.fromTop
-                        : null,
-                    left: (widget.search!.fromLeft != null)
-                        ? widget.search!.fromLeft
-                        : null,
-                    right: (widget.search!.fromRight != null)
-                        ? widget.search!.fromRight
-                        : null,
-                    bottom: (widget.search!.fromBottom != null)
-                        ? widget.search!.fromBottom
-                        : null,
+                    top: 16,
+                    left: MediaQuery.of(context).size.width * 0.05,
                     child: Material(
                       clipBehavior: Clip.hardEdge,
                       borderRadius: BorderRadius.circular(

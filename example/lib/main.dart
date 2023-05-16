@@ -1,3 +1,4 @@
+import 'package:example/key_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:device_preview/device_preview.dart';
@@ -35,18 +36,18 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: "key",
+    authKey: KeyConstant.key,
     zoom: 16,
     maxZoom: 18,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods("key");
+  final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
   final Three60Marker three60Marker = Three60Marker(
     on360MarkerTap: () {},
   );
   final ViewerClass viewer = ViewerClass(
     viewer: Viewer(
-        accessToken: "key",
+        accessToken: KeyConstant.key,
         pinIcon: const Icon(
           Icons.abc,
           size: 48,
@@ -58,10 +59,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     viewerPosition: const Offset(32, 32),
   );
   final SearchClass search = SearchClass(
-    searchHeight: 40,
+    searchHeight: 80,
     searchWidth: 340,
-    fromTop: 16,
-    fromLeft: 20,
     onTapAutoComplete: (AutoCompleteModel model) async {
       // FeatureModel? feature =
       //     await galliMethods.search(model.name!, controller.map.center);

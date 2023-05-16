@@ -73,3 +73,7 @@
 ## 1.0.6
 
 * logs
+
+## 1.0.7
+
+* added Search Query with distance

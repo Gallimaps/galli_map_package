@@ -5,10 +5,6 @@ class SearchClass {
   final String? searchHint;
   final double? searchHeight;
   final double? searchWidth;
-  final double? fromRight;
-  final double? fromLeft;
-  final double? fromTop;
-  final double? fromBottom;
   final double? borderRadius;
   final Color? iconColor;
   final Widget? backWidget;
@@ -24,10 +20,6 @@ class SearchClass {
     this.searchHeight,
     this.searchWidth,
     this.onTapAutoComplete,
-    this.fromLeft,
-    this.fromRight,
-    this.fromTop,
-    this.fromBottom,
     this.borderRadius,
     this.iconColor,
     this.backWidget,
