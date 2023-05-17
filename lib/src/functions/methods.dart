@@ -5,6 +5,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:galli_map/src/functions/api.dart';
 import 'package:galli_map/src/models/image_model.dart';
+import 'package:galli_map/src/models/reversegeo_model.dart';
 import 'package:galli_map/src/static/url.dart';
 import 'package:galli_map/src/utils/location.dart';
 import 'package:geolocator/geolocator.dart';
@@ -44,25 +45,16 @@ class GalliMethods {
     }
   }
 
-  Future<HouseModel?> reverse(LatLng latLng) async {
+  Future<ReverseGeocodingModel?> reverse(LatLng latLng) async {
     var response = await geoApi.get(
         galliUrl.reverseGeoCode(latLng, accessToken), accessToken);
     if (response != null) {
       var data = jsonDecode(response)["data"];
-      List<LatLng> coord = [];
-      if (data["houseCoords"] != null) {
-        data['houseCoords'][0][0].forEach((v) {
-          coord.add(LatLng(v[1], v[0]));
-        });
-      }
-      HouseModel house = HouseModel(
-        featurecode: data["gallicode"],
-        streetNameEn: data["generalName"],
-        houseCode: data["houseNumber"],
-        coordinate: coord,
-        center: latLng,
-      );
+      // print("For location data $latLng ---> $data");
 
+      ReverseGeocodingModel house = ReverseGeocodingModel.fromJson(data);
+      print(" : ${house.toJson()}");
+      // print("\n\n address : ${house.address}");
       return house;
     } else {
       return null;

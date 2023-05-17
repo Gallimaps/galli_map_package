@@ -63,9 +63,9 @@ class HouseModel {
 
   HouseModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    featurecode = json['featurecode'];
+    featurecode = json['gallicode'];
     number = json['number'];
-    houseCode = json['house_code'];
+    houseCode = json['houseNumber'];
     maxlat = json['maxlat'];
     minlat = json['minlat'];
     maxlong = json['maxlong'];
@@ -73,7 +73,7 @@ class HouseModel {
     uniqueId = json['unique_id'];
     streetCode = json['street_code'];
     ward = json['ward'];
-    streetNameEn = json['street_name_en'];
+    streetNameEn = json['generalName'];
     center = json['center'] != null
         ? LatLng(double.parse(json['center']['latitude']),
             double.parse(json['center']['longitude']))
@@ -82,9 +82,8 @@ class HouseModel {
         json['address'] != null ? Address.fromJson(json['address']) : null;
     if (json['coordinate'] != null) {
       coordinate = <LatLng>[];
-      json['coordinate'][0].forEach((v) {
-        coordinate!.add(
-            LatLng(double.parse(v["latitude"]), double.parse(v["longitude"])));
+      json['houseCoords'][0][0].forEach((v) {
+        coordinate!.add(LatLng(v[1], v[0]));
       });
     }
   }

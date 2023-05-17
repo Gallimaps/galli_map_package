@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:math';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
@@ -14,9 +15,12 @@ class TestPage extends StatefulWidget {
 
 class _TestPageState extends State<TestPage> {
   // var message = "";
-  LatLng mylocation = LatLng(27.6617019, 85.3256189);
+  // LatLng mylocation = LatLng(27.677121, 85.322321);
+  LatLng mylocation = LatLng(27.671712, 85.312208);
   final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
-
+  LatLng minLatlng = LatLng(27.610126, 85.253078);
+  LatLng maxLatlng = LatLng(27.784424, 85.399647);
+  int testRunCount = 100;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,20 +44,31 @@ class _TestPageState extends State<TestPage> {
             ),
             ElevatedButton(
               onPressed: () async {
-                var message = await galliMethods.reverse(mylocation);
+                for (int i = 0; i < testRunCount; i++) {
+                  double lat =
+                      (Random().nextInt(27784424 - 27610126) + 27610126) /
+                          1000000;
+                  double lng =
+                      (Random().nextInt(85399647 - 85253078) + 85253078) /
+                          1000000;
+                  LatLng testLocation = LatLng(lat, lng);
+                  print("Testing with location data $testLocation");
+                  await galliMethods.reverse(testLocation);
+                }
+                // await galliMethods.reverse(mylocation);
                 // log("Message ${message!.toJson()}");
-                Get.showSnackbar(GetSnackBar(
-                  duration: Duration(seconds: 10),
-                  title: "Reverse",
-                  message: "${message!.toJson()}",
-                ));
+                // Get.showSnackbar(GetSnackBar(
+                //   duration: Duration(seconds: 10),
+                //   title: "Reverse",
+                //   message: "${message!.toJson()}",
+                // ));
               },
               child: const Text("Reverse"),
             ),
             ElevatedButton(
               onPressed: () async {
                 var message = await galliMethods.search("well", mylocation);
-                log("Message ${message!.toJson()}");
+                // log("Message ${message!.toJson()}");
                 Get.showSnackbar(GetSnackBar(
                   duration: Duration(seconds: 4),
                   title: "Search \"well\"",
@@ -63,7 +78,11 @@ class _TestPageState extends State<TestPage> {
               child: const Text("Search"),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () async {
+                var xyz = galliMethods.reverse(mylocation);
+
+                print(" abc ${xyz}");
+              },
               child: const Text("Route"),
             ),
             ElevatedButton(

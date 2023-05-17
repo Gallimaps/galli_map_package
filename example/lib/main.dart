@@ -93,8 +93,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         child: GalliMap(
           controller: controller,
           onTap: (_) async {
-            HouseModel? house = await galliMethods.reverse(_);
-            log("${house!.toJson()}");
+            // HouseModel? house = await galliMethods.reverse(_);
+            // log("${house!.toJson()}");
+            log("$_");
           },
           // onTap: (_) {
           //   galliMethods.reverse(_);
