@@ -85,3 +85,7 @@
 ## 1.0.9
 
 * updated motion sensor
+
+## 1.0.10
+
+* Updated GeoCoding Model
