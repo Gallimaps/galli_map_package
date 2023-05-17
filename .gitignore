@@ -31,4 +31,4 @@ build/
 /example/lib/key_constant.dart
 
 
-/example/lib/test/
+/example/lib/test/test_widget.dart
