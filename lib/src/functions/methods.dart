@@ -50,11 +50,8 @@ class GalliMethods {
         galliUrl.reverseGeoCode(latLng, accessToken), accessToken);
     if (response != null) {
       var data = jsonDecode(response)["data"];
-      // print("For location data $latLng ---> $data");
 
       ReverseGeocodingModel house = ReverseGeocodingModel.fromJson(data);
-      print(" : ${house.toJson()}");
-      // print("\n\n address : ${house.address}");
       return house;
     } else {
       return null;
