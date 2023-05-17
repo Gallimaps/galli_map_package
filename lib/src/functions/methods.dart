@@ -47,7 +47,6 @@ class GalliMethods {
   Future<HouseModel?> reverse(LatLng latLng) async {
     var response = await geoApi.get(
         galliUrl.reverseGeoCode(latLng, accessToken), accessToken);
-    log(response);
     if (response != null) {
       var data = jsonDecode(response)["data"];
       List<LatLng> coord = [];
@@ -121,6 +120,7 @@ class GalliMethods {
           speed: 0,
           speedAccuracy: 12);
     }
+    // log(currentLocation.toString());
     return currentLocation;
   }
 
