@@ -3,17 +3,17 @@ import 'package:latlong2/latlong.dart';
 
 class HouseModel {
   int? id;
-  String? featurecode;
+  String? gallicode;
 
   ///galli code by gallimaps
   int? number;
   String? houseCode;
 
   ///house code by metropoliton
-  String? maxlat;
-  String? minlat;
-  String? maxlong;
-  String? minlong;
+  // String? maxlat;
+  // String? minlat;
+  // String? maxlong;
+  // String? minlong;
   String? uniqueId;
   String? streetCode;
   String? ward;
@@ -24,13 +24,13 @@ class HouseModel {
 
   HouseModel({
     this.id,
-    this.featurecode,
+    this.gallicode,
     this.number,
     this.houseCode,
-    this.maxlat,
-    this.minlat,
-    this.maxlong,
-    this.minlong,
+    // this.maxlat,
+    // this.minlat,
+    // this.maxlong,
+    // this.minlong,
     this.uniqueId,
     this.streetCode,
     this.ward,
@@ -50,7 +50,7 @@ class HouseModel {
   HouseModel.fromFeatureString(Map<String, dynamic> json) {
     streetNameEn = json['street_name_en'];
     houseCode = json['house_code'];
-    featurecode = json['featurecode'];
+    gallicode = json['gallicode'];
     center = LatLng(
         json['center']['coordinates'][1], json['center']['coordinates'][0]);
     if (json['coordinate'] != null) {
@@ -63,16 +63,16 @@ class HouseModel {
 
   HouseModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    featurecode = json['gallicode'];
+    gallicode = json['gallicode'];
     number = json['number'];
     houseCode = json['houseNumber'];
-    maxlat = json['maxlat'];
-    minlat = json['minlat'];
-    maxlong = json['maxlong'];
-    minlong = json['minlong'];
+    // maxlat = json['maxlat'];
+    // minlat = json['minlat'];
+    // maxlong = json['maxlong'];
+    // minlong = json['minlong'];
     uniqueId = json['unique_id'];
     streetCode = json['street_code'];
-    ward = json['ward'];
+    ward = json['wardNumber'];
     streetNameEn = json['generalName'];
     center = json['center'] != null
         ? LatLng(double.parse(json['center']['latitude']),
@@ -91,13 +91,13 @@ class HouseModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['featurecode'] = featurecode;
+    data['gallicode'] = gallicode;
     data['number'] = number;
     data['house_code'] = houseCode;
-    data['maxlat'] = maxlat;
-    data['minlat'] = minlat;
-    data['maxlong'] = maxlong;
-    data['minlong'] = minlong;
+    // data['maxlat'] = maxlat;
+    // data['minlat'] = minlat;
+    // data['maxlong'] = maxlong;
+    // data['minlong'] = minlong;
     data['unique_id'] = uniqueId;
     data['street_code'] = streetCode;
     data['ward'] = ward;
@@ -149,7 +149,7 @@ class Address {
     statecode = json['statecode'];
     district = json['district'];
     municipal = json['municipal'];
-    ward = json['ward'];
+    ward = json['wardNumber'];
     state = json['state'] != null ? StatePlace.fromJson(json['state']) : null;
   }
 

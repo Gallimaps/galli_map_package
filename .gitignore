@@ -29,6 +29,5 @@ migrate_working_dir/
 .packages
 build/
 /example/lib/key_constant.dart
+/example/lib/test.dart
 
-
-/example/lib/test/test_widget.dart

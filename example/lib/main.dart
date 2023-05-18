@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:example/key_constant.dart';
+import 'package:example/test.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:device_preview/device_preview.dart';
@@ -39,19 +40,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: "key",
+    authKey: KeyConstant.key,
     zoom: 16,
     maxZoom: 22,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods("key");
+  final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
 
   final Three60Marker three60Marker = Three60Marker(
     on360MarkerTap: () {},
   );
   final ViewerClass viewer = ViewerClass(
     viewer: Viewer(
-        accessToken: "key",
+        accessToken: KeyConstant.key,
         pinIcon: const Icon(
           Icons.circle,
           size: 48,
@@ -199,8 +200,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 right: 64,
                 child: GestureDetector(
                   onTap: () async {
-                    galliMethods.animateMapMove(LatLng(28.684222, 85.303778),
-                        16, this, mounted, controller.map);
+                    // galliMethods.animateMapMove(LatLng(28.684222, 85.303778),
+                    //     16, this, mounted, controller.map);
+                    Get.to(const TestPage());
                   },
                   child: Container(
                     width: 32,
