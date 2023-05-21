@@ -1,11 +1,8 @@
 import 'dart:developer';
-
 import 'package:example/key_constant.dart';
-import 'package:example/test.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:get/get.dart';
 
 void main() {
   runApp(DevicePreview(
@@ -20,7 +17,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: 'Galli Package',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -202,7 +199,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   onTap: () async {
                     // galliMethods.animateMapMove(LatLng(28.684222, 85.303778),
                     //     16, this, mounted, controller.map);
-                    Get.to(const TestPage());
                   },
                   child: Container(
                     width: 32,

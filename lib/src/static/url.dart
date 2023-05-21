@@ -3,7 +3,6 @@ import 'package:latlong2/latlong.dart';
 class GalliUrl {
   final String imageUrl = "https://image-init.gallimap.com";
   final String geoUrl = "https://route-init.gallimap.com";
-  // final String geoUrl = "https://route-uat.gallimap.com";
 
   String param(String accessToken) => "?accessToken=$accessToken";
 
@@ -12,7 +11,6 @@ class GalliUrl {
       "/api/v1/streetmarker/${minlatlng.latitude},${minlatlng.longitude}/${maxLatlng.latitude},${maxLatlng.longitude}/$zoomLevel?accessToken=$accessToken";
   String reverseGeoCode(LatLng latLng, String accessToken) =>
       "/api/v1/reverse/generalReverse?accessToken=$accessToken&lat=${latLng.latitude}&lng=${latLng.longitude}";
-  // "/reverseGeoApi/reverse/HouseNumber?accessToken=$accessToken&lat=${latLng.latitude}&lng=${latLng.longitude}";
   String autoComplete(String query, String accessToken) =>
       "/api/v1/search/autocomplete?accessToken=$accessToken&word=$query";
   String search(String place, LatLng latlng, String accessToken) =>

@@ -49,7 +49,7 @@ class GalliMethods {
         galliUrl.reverseGeoCode(latLng, accessToken), accessToken);
     if (response != null) {
       var data = jsonDecode(response)["data"];
-      print("data :: ${data.toString()}");
+      // print("data :: ${data.toString()}");
       ReverseGeocodingModel house = ReverseGeocodingModel.fromJson(data);
       return house;
     } else {

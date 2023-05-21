@@ -2,7 +2,7 @@ import 'package:galli_map/src/models/feature_model.dart';
 import 'package:latlong2/latlong.dart';
 
 class HouseModel {
-  int? id;
+  // int? id;
   String? gallicode;
 
   ///galli code by gallimaps
@@ -14,26 +14,26 @@ class HouseModel {
   // String? minlat;
   // String? maxlong;
   // String? minlong;
-  String? uniqueId;
+  // String? uniqueId;
   String? streetCode;
   String? ward;
+  String? district;
+  String? province;
   String? streetNameEn;
   LatLng? center;
   Address? address;
   List<LatLng>? coordinate;
 
   HouseModel({
-    this.id,
+    // this.id,
     this.gallicode,
     this.number,
     this.houseCode,
-    // this.maxlat,
-    // this.minlat,
-    // this.maxlong,
-    // this.minlong,
-    this.uniqueId,
+    // this.uniqueId,
     this.streetCode,
     this.ward,
+    this.district,
+    this.province,
     this.streetNameEn,
     this.center,
     this.address,
@@ -62,18 +62,16 @@ class HouseModel {
   }
 
   HouseModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    // id = json['id'];
     gallicode = json['gallicode'];
     number = json['number'];
     houseCode = json['houseNumber'];
-    // maxlat = json['maxlat'];
-    // minlat = json['minlat'];
-    // maxlong = json['maxlong'];
-    // minlong = json['minlong'];
-    uniqueId = json['unique_id'];
+    // uniqueId = json['unique_id'];
     streetCode = json['street_code'];
-    ward = json['wardNumber'];
-    streetNameEn = json['generalName'];
+    ward = json['ward'];
+    district = json['district'];
+    province = json['province'];
+    streetNameEn = json['tole'];
     center = json['center'] != null
         ? LatLng(double.parse(json['center']['latitude']),
             double.parse(json['center']['longitude']))
@@ -90,18 +88,16 @@ class HouseModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+    // data['id'] = id;
     data['gallicode'] = gallicode;
     data['number'] = number;
     data['house_code'] = houseCode;
-    // data['maxlat'] = maxlat;
-    // data['minlat'] = minlat;
-    // data['maxlong'] = maxlong;
-    // data['minlong'] = minlong;
-    data['unique_id'] = uniqueId;
+    // data['unique_id'] = uniqueId;
     data['street_code'] = streetCode;
     data['ward'] = ward;
-    data['street_name_en'] = streetNameEn;
+    data['district'] = district;
+    data['province'] = province;
+    data['tole'] = streetNameEn;
     if (center != null) {
       data['center'] = center!.toJson();
     }

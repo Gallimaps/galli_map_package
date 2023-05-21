@@ -14,7 +14,6 @@ class ReverseGeocodingModel {
 
   ReverseGeocodingModel.fromJson(Map<String, dynamic> json) {
     address = json['generalName'];
-    // house = json['gallicode'] == null ? null : HouseModel.fromJson(json);
     house = json['gallicode'] == null ? null : HouseModel.fromJson(json);
   }
 }
