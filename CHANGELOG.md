@@ -93,3 +93,7 @@
 ## 1.0.11
 
 * Updated GeoCoding Model with ward, province, district
+
+## 1.0.12
+
+* Updated Model
