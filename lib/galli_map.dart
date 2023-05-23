@@ -18,3 +18,4 @@ export 'package:latlong2/latlong.dart';
 export './src/models/viewer.dart';
 export './src/models/search.dart';
 export 'src/models/three60_marker.dart';
+export 'package:geolocator/geolocator.dart';

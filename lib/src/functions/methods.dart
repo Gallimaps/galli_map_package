@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:galli_map/src/functions/api.dart';
-import 'package:galli_map/src/models/image_model.dart';
-import 'package:galli_map/src/models/reversegeo_model.dart';
+
 import 'package:galli_map/src/static/url.dart';
 import 'package:galli_map/src/utils/location.dart';
-import 'package:geolocator/geolocator.dart';
+
+enum Three60Type { focused, near }
 
 class GalliMethods {
   final String accessToken;

@@ -13,6 +13,7 @@ class SearchClass {
   final double? cursorHeight;
   final Color? cursorColor;
   final Function(AutoCompleteModel autoCompleteData)? onTapAutoComplete;
+  final TextEditingController search = TextEditingController();
 
   SearchClass({
     this.searchHint = "Find Places",
@@ -27,4 +28,7 @@ class SearchClass {
     this.cursorHeight,
     this.cursorColor,
   });
+  updateSearchField(String text) {
+    search.text = text;
+  }
 }

@@ -97,3 +97,11 @@
 ## 1.0.12
 
 * Updated Model
+
+## 1.0.13
+
+* Updated export
+
+## 1.0.14
+
+* Update search text

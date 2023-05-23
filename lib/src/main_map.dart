@@ -5,11 +5,9 @@ import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:galli_map/src/functions/cache.dart';
 import 'package:galli_map/src/functions/encrption.dart';
-import 'package:galli_map/src/models/image_model.dart';
 import 'package:galli_map/src/utils/latlng.dart';
 import 'package:galli_map/src/utils/location.dart';
 import 'package:galli_map/src/widgets/markers/user_location_marker.dart';
-import 'package:geolocator/geolocator.dart';
 
 class GalliMap extends StatefulWidget {
   final double? height;
@@ -102,7 +100,6 @@ class Three60Icon extends StatelessWidget {
 
 class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
   Position? currentLocation;
-  final TextEditingController _search = TextEditingController();
   bool showSearch = false;
   List<AutoCompleteModel> autocompleteResults = [];
   List<ImageModel> images = [];
@@ -114,7 +111,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
   LocationPermission? currentPermission;
 
   typingWait() async {
-    if (_search.text.length > 2) {
+    if (widget.search!.search.text.length > 2) {
       typingWaiter =
           Timer.periodic(const Duration(milliseconds: 100), (timer) async {
         if (timer.tick == 5) {
@@ -127,7 +124,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
           });
           typingWaiter!.cancel();
           List<AutoCompleteModel> tempData =
-              await galliMethods!.autoComplete(_search.text);
+              await galliMethods!.autoComplete(widget.search!.search.text);
           List<AutoCompleteModel> data = tempData.toSet().toList();
           if (data.isNotEmpty) {
             autocompleteResults = data;
@@ -399,7 +396,8 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                   }
                                   showSearch = false;
                                   autocompleteResults = [];
-                                  _search.text = autoCompleteData.name!;
+                                  widget.search!.search.text =
+                                      autoCompleteData.name!;
                                   if (!mounted) {
                                     return;
                                   }
@@ -454,7 +452,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                         width: widget.search?.searchWidth ??
                             MediaQuery.of(context).size.width * 0.9,
                         child: TextFormField(
-                          controller: _search,
+                          controller: widget.search!.search,
                           onTap: () {
                             if (!mounted) {
                               return;
@@ -489,7 +487,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                           Colors.orange,
                                     ),
                               ),
-                              suffixIcon: _search.text == ""
+                              suffixIcon: widget.search!.search.text == ""
                                   ? !showSearch
                                       ? const SizedBox()
                                       : InkWell(
@@ -525,7 +523,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                         )
                                   : InkWell(
                                       onTap: () {
-                                        _search.text = "";
+                                        widget.search!.search.text = "";
                                         if (!mounted) {
                                           return;
                                         }
