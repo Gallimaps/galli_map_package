@@ -16,9 +16,6 @@ class HouseModel {
   // String? minlong;
   // String? uniqueId;
   String? streetCode;
-  String? ward;
-  String? district;
-  String? province;
   String? streetNameEn;
   LatLng? center;
   Address? address;
@@ -31,9 +28,6 @@ class HouseModel {
     this.houseCode,
     // this.uniqueId,
     this.streetCode,
-    this.ward,
-    this.district,
-    this.province,
     this.streetNameEn,
     this.center,
     this.address,
@@ -68,9 +62,7 @@ class HouseModel {
     houseCode = json['houseNumber'];
     // uniqueId = json['unique_id'];
     streetCode = json['street_code'];
-    ward = json['ward'];
-    district = json['district'];
-    province = json['province'];
+
     streetNameEn = json['tole'];
     center = json['center'] != null
         ? LatLng(double.parse(json['center']['latitude']),
@@ -94,9 +86,7 @@ class HouseModel {
     data['house_code'] = houseCode;
     // data['unique_id'] = uniqueId;
     data['street_code'] = streetCode;
-    data['ward'] = ward;
-    data['district'] = district;
-    data['province'] = province;
+
     data['tole'] = streetNameEn;
     if (center != null) {
       data['center'] = center!.toJson();
