@@ -105,3 +105,7 @@
 ## 1.0.14
 
 * Update search text
+
+## 1.0.15
+
+* minor changes
