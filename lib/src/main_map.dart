@@ -111,7 +111,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
   LocationPermission? currentPermission;
 
   typingWait() async {
-    if (widget.search!.search.text.length > 2) {
+    if (search.search.text.length > 2) {
       typingWaiter =
           Timer.periodic(const Duration(milliseconds: 100), (timer) async {
         if (timer.tick == 5) {
@@ -124,7 +124,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
           });
           typingWaiter!.cancel();
           List<AutoCompleteModel> tempData =
-              await galliMethods!.autoComplete(widget.search!.search.text);
+              await galliMethods!.autoComplete(search.search.text);
           List<AutoCompleteModel> data = tempData.toSet().toList();
           if (data.isNotEmpty) {
             autocompleteResults = data;
@@ -170,11 +170,31 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
   }
 
   GalliMethods? galliMethods;
+  late SearchClass search;
 
   @override
   void initState() {
+    if (widget.search != null) {
+      search = widget.search!;
+    } else {
+      search = SearchClass(
+        searchWidth: 340,
+        searchHeight: 40,
+        onTapAutoComplete: (AutoCompleteModel model) async {
+          // String location = model.name.toString();
+          // var current = await galliMethods!.getCurrentLocation();
+          // LatLng mylocation = LatLng(current.latitude, current.longitude);
+
+          // // log("name $location, value  ${mylocation.toJson()}");
+          // Future<FeatureModel?> result =
+          //     galliMethods!.search(location, mylocation);
+          //     await galliMethods.animateMapMove(, 18, this, mounted, map)
+        },
+      );
+    }
     galliMethods = GalliMethods(widget.controller.authKey);
     locationaServicesInitiate();
+
     super.initState();
   }
 
@@ -389,15 +409,13 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                 in autocompleteResults)
                               GestureDetector(
                                 onTap: () async {
-                                  if (widget.search?.onTapAutoComplete !=
-                                      null) {
-                                    await widget.search
-                                        ?.onTapAutoComplete!(autoCompleteData);
+                                  if (search.onTapAutoComplete != null) {
+                                    await search
+                                        .onTapAutoComplete!(autoCompleteData);
                                   }
                                   showSearch = false;
                                   autocompleteResults = [];
-                                  widget.search!.search.text =
-                                      autoCompleteData.name!;
+                                  search.search.text = autoCompleteData.name!;
                                   if (!mounted) {
                                     return;
                                   }
@@ -410,15 +428,15 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                   decoration: BoxDecoration(
                                       border: Border(
                                           bottom: BorderSide(
-                                              color: widget.search?.iconColor ??
+                                              color: search.iconColor ??
                                                   Colors.orange))),
                                   child: ListTile(
                                       horizontalTitleGap: 0,
                                       minLeadingWidth: 48,
                                       leading: Icon(
                                         Icons.location_on,
-                                        color: widget.search?.iconColor ??
-                                            Colors.orange,
+                                        color:
+                                            search.iconColor ?? Colors.orange,
                                       ),
                                       title: Text(
                                         autoCompleteData.name ?? "null",
@@ -448,11 +466,11 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                       borderRadius: BorderRadius.circular(20),
                       elevation: 4,
                       child: SizedBox(
-                        height: widget.search?.searchHeight ?? 40,
-                        width: widget.search?.searchWidth ??
+                        height: search.searchHeight ?? 40,
+                        width: search.searchWidth ??
                             MediaQuery.of(context).size.width * 0.9,
                         child: TextFormField(
-                          controller: widget.search!.search,
+                          controller: search.search,
                           onTap: () {
                             if (!mounted) {
                               return;
@@ -477,17 +495,16 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                             }
                           },
                           decoration: InputDecoration(
-                              hintText: widget.search?.searchHint,
+                              hintText: search.searchHint,
                               prefixIcon: Padding(
                                 padding: EdgeInsets.all(10.0),
-                                child: widget.search?.suffixWidget ??
+                                child: search.suffixWidget ??
                                     Icon(
                                       Icons.search,
-                                      color: widget.search?.iconColor ??
-                                          Colors.orange,
+                                      color: search.iconColor ?? Colors.orange,
                                     ),
                               ),
-                              suffixIcon: widget.search!.search.text == ""
+                              suffixIcon: search.search.text == ""
                                   ? !showSearch
                                       ? const SizedBox()
                                       : InkWell(
@@ -509,21 +526,19 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                             child: SizedBox(
                                               width: 20,
                                               height: 20,
-                                              child:
-                                                  widget.search?.closeWidget ??
-                                                      Icon(
-                                                        Icons.close,
-                                                        color: widget.search
-                                                                ?.iconColor ??
-                                                            Colors.orange,
-                                                        size: 18,
-                                                      ),
+                                              child: search.closeWidget ??
+                                                  Icon(
+                                                    Icons.close,
+                                                    color: search.iconColor ??
+                                                        Colors.orange,
+                                                    size: 18,
+                                                  ),
                                             ),
                                           ),
                                         )
                                   : InkWell(
                                       onTap: () {
-                                        widget.search!.search.text = "";
+                                        search.search.text = "";
                                         if (!mounted) {
                                           return;
                                         }
@@ -531,10 +546,10 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                       },
                                       child: Padding(
                                         padding: EdgeInsets.all(10.0),
-                                        child: widget.search?.backWidget ??
+                                        child: search.backWidget ??
                                             Icon(
                                               Icons.arrow_back,
-                                              color: widget.search?.iconColor ??
+                                              color: search.iconColor ??
                                                   Colors.orange,
                                             ),
                                       ),
@@ -544,10 +559,10 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                               focusedBorder: InputBorder.none,
                               enabledBorder: InputBorder.none,
                               contentPadding: const EdgeInsets.only(top: 8)),
-                          cursorColor: widget.search?.cursorColor ??
-                              const Color(0xff454545),
-                          cursorHeight: widget.search?.cursorHeight ?? 12,
-                          style: widget.search?.textStyle ??
+                          cursorColor:
+                              search.cursorColor ?? const Color(0xff454545),
+                          cursorHeight: search.cursorHeight ?? 12,
+                          style: search.textStyle ??
                               const TextStyle(
                                 fontSize: 14,
                                 color: Color(0xff454545),
@@ -668,8 +683,8 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                     child: Center(
                                       child: Icon(
                                         Icons.location_searching_outlined,
-                                        color: widget.search?.iconColor ??
-                                            Colors.orange,
+                                        color:
+                                            search.iconColor ?? Colors.orange,
                                       ),
                                     ),
                                   )),

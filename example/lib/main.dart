@@ -36,19 +36,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: "key",
+    authKey: "Key",
     zoom: 16,
     maxZoom: 22,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods("key");
+  final GalliMethods galliMethods = GalliMethods("Key");
 
   final Three60Marker three60Marker = Three60Marker(
     on360MarkerTap: () {},
   );
   final ViewerClass viewer = ViewerClass(
     viewer: Viewer(
-        accessToken: "key",
+        accessToken: "Key",
         pinIcon: const Icon(
           Icons.circle,
           size: 48,
@@ -58,20 +58,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         width: 300,
         onSaved: (x, y) {}),
     viewerPosition: const Offset(32, 32),
-  );
-  final SearchClass search = SearchClass(
-    searchHeight: 80,
-    searchWidth: 340,
-    onTapAutoComplete: (AutoCompleteModel model) async {
-      // FeatureModel? feature =
-      //     await galliMethods.search(model.name!, controller.map.center);
-      // if (feature != null) {
-      //   await galliMethods.getRoute(
-      //       source: controller.map.center,
-      //       destination: feature.geometry!.coordinates!.first);
-      // destination: feature.geometry.coordinates.first
-      // }
-    },
   );
 
   @override

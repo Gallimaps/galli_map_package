@@ -34,6 +34,7 @@ class GalliMethods {
     if (response != [] && response != null) {
       List<FeatureModel> features = [];
       var datas = jsonDecode(response)["data"]["features"];
+
       for (var data in datas) {
         FeatureModel featureData = FeatureModel.fromJson(data);
         features.add(featureData);
