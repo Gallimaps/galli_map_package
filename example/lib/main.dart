@@ -1,6 +1,9 @@
 import 'dart:developer';
+import 'package:example/key_constant.dart';
+import 'package:example/test.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
+import 'package:get/get.dart';
 
 void main() {
   // runApp(DevicePreview(
@@ -16,7 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Galli Package',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -36,19 +39,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: "Key",
+    authKey: KeyConstant.key,
     zoom: 16,
     maxZoom: 22,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods("Key");
+  final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
 
   final Three60Marker three60Marker = Three60Marker(
     on360MarkerTap: () {},
   );
   final ViewerClass viewer = ViewerClass(
     viewer: Viewer(
-        accessToken: "Key",
+        accessToken: KeyConstant.key,
         pinIcon: const Icon(
           Icons.circle,
           size: 48,
@@ -77,9 +80,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           onTap: (_) async {
             // HouseModel? house = await galliMethods.reverse(_);
             // log("${house!.toJson()}");
-            log("$_");
+            // log("$_");
             var xyz = await galliMethods.reverse(_);
-            log("${xyz!.toJson()}");
+            // log("${xyz!.toJson()}");
           },
           onMapLoadComplete: (controller) async {
             galliMethods.animateMapMove(
@@ -184,6 +187,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   onTap: () async {
                     // galliMethods.animateMapMove(LatLng(28.684222, 85.303778),
                     //     16, this, mounted, controller.map);
+                    // Get.to(TestPage());
+                    log(controller.map.center.toString());
+                    FeatureModel? feature = await galliMethods.search(
+                        "pashupatinath", controller.map.center);
+                    LatLng dest = feature!.geometry!.coordinates!.first;
+                    log(dest.toString());
+                    await galliMethods.animateMapMove(
+                        dest, 16, this, mounted, controller.map);
                   },
                   child: Container(
                     width: 32,

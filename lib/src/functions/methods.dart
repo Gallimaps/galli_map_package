@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:galli_map/galli_map.dart';
@@ -34,9 +35,9 @@ class GalliMethods {
     if (response != [] && response != null) {
       List<FeatureModel> features = [];
       var datas = jsonDecode(response)["data"]["features"];
-
       for (var data in datas) {
         FeatureModel featureData = FeatureModel.fromJson(data);
+
         features.add(featureData);
       }
       return features.first;

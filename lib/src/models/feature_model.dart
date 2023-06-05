@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:galli_map/galli_map.dart';
 
 /// This class represents a geographic feature, consisting of a `type`,
@@ -9,7 +11,11 @@ class FeatureModel {
 
   /// Constructor that creates a new `FeatureModel` with the given `type`,
   /// `properties`, and `geometry`.
-  FeatureModel({this.type, this.properties, this.geometry});
+  FeatureModel({
+    this.type,
+    this.properties,
+    this.geometry,
+  });
 
   /// Constructor that creates a new `FeatureModel` from a JSON map.
   FeatureModel.fromJson(Map<String, dynamic> json) {
@@ -75,12 +81,24 @@ class Geometry {
   /// Constructor that creates a new `Geometry` object from a JSON map.
   Geometry.fromJson(Map<String, dynamic> json) {
     type = stringToFeatureType(json['type'].toString().toLowerCase());
-    coordinates = type == FeatureType.point
-        ? jibbrishToCoordinates(json['coordinates'], type!)[0]
-        : null;
     listOfCoordinates = type != FeatureType.point
         ? jibbrishToCoordinates(json['coordinates'], type!)[1]
-        : null;
+        : [jibbrishToCoordinates(json['coordinates'], type!)[0]];
+    coordinates = type == FeatureType.point
+        ? jibbrishToCoordinates(json['coordinates'], type!)[0]
+        : [_calculateCenterCoordinate(listOfCoordinates!.first)];
+  }
+
+  LatLng _calculateCenterCoordinate(List<LatLng> coordinates) {
+    double xSum = 0.0;
+    double ySum = 0.0;
+    for (int i = 0; i < coordinates.length; i++) {
+      xSum += coordinates[i].latitude;
+      ySum += coordinates[i].longitude;
+    }
+    double xCenter = xSum / coordinates.length;
+    double yCenter = ySum / coordinates.length;
+    return LatLng(xCenter, yCenter);
   }
 
   /// Converts the `Geometry` object to a JSON map.
@@ -103,6 +121,8 @@ FeatureType stringToFeatureType(String string) {
     return FeatureType.multilinestring;
   } else if (string == "multipolygon") {
     return FeatureType.multipolygon;
+  } else if (string == "polygon") {
+    return FeatureType.polygon;
   } else {
     return FeatureType.other;
   }
@@ -142,6 +162,16 @@ List<dynamic> jibbrishToCoordinates(List jibbrish, FeatureType type) {
       }
       listOfCoordinates.add(data);
       break;
+    case FeatureType.polygon:
+      List<LatLng> data = [];
+      for (var mainData in jibbrish) {
+        for (var childData in mainData) {
+          LatLng latLng = LatLng(childData[1], childData[0]);
+          data.add(latLng);
+        }
+      }
+      listOfCoordinates.add(data);
+      break;
     case FeatureType.other:
       break;
   }
@@ -149,4 +179,4 @@ List<dynamic> jibbrishToCoordinates(List jibbrish, FeatureType type) {
 }
 
 /// An enum to represent the different types of features in GeoJSON
-enum FeatureType { point, multilinestring, multipolygon, other }
+enum FeatureType { point, multilinestring, multipolygon, polygon, other }

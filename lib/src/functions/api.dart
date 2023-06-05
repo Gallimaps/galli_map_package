@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:galli_map/src/static/url.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,7 +19,7 @@ class GalliApi {
     ).timeout(
       const Duration(seconds: 8),
       onTimeout: () {
-        // Time has run out, do what you wanted to do.
+        log("request is timed out");
         return http.Response(
             'Error', 408); // Request Timeout response status code
       },
