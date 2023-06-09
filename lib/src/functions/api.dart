@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:galli_map/src/static/url.dart';
 import 'package:http/http.dart' as http;
 
@@ -8,7 +6,6 @@ class GalliApi {
   GalliApi({required this.baseUrl});
 
   Future get(String url, String accessToken) async {
-    // log("$baseUrl$url");
     var response = await http.get(
       Uri.parse("$baseUrl$url"),
       headers: <String, String>{
@@ -19,7 +16,6 @@ class GalliApi {
     ).timeout(
       const Duration(seconds: 8),
       onTimeout: () {
-        log("request is timed out");
         return http.Response(
             'Error', 408); // Request Timeout response status code
       },

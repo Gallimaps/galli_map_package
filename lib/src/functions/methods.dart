@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:galli_map/galli_map.dart';
@@ -13,9 +12,12 @@ enum Three60Type { focused, near }
 class GalliMethods {
   final String accessToken;
   GalliMethods(this.accessToken);
-  Future<List<AutoCompleteModel>> autoComplete(String query) async {
+  Future<List<AutoCompleteModel>> autoComplete(
+      String query, LatLng location) async {
     var response = await geoApi.get(
-        galliUrl.autoComplete(query, accessToken), accessToken);
+        galliUrl.autoComplete(
+            query, accessToken, LatLng(location.latitude, location.longitude)),
+        accessToken);
     List<AutoCompleteModel> autoCompleteResults = [];
     if (response != [] && response != null) {
       var datas = jsonDecode(response)["data"];
@@ -110,7 +112,6 @@ class GalliMethods {
           speed: 0,
           speedAccuracy: 12);
     }
-    // log(currentLocation.toString());
     return currentLocation;
   }
 

@@ -109,3 +109,7 @@
 ## 1.0.15
 
 * minor changes
+
+## 1.1.0
+
+* modified nullables and null safety

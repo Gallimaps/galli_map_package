@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:galli_map/galli_map.dart';
 
 /// This class represents a geographic feature, consisting of a `type`,

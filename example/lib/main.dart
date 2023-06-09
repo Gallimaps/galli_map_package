@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:example/key_constant.dart';
 import 'package:example/test.dart';
 import 'package:flutter/material.dart';
@@ -81,17 +82,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             // HouseModel? house = await galliMethods.reverse(_);
             // log("${house!.toJson()}");
             // log("$_");
-            var xyz = await galliMethods.reverse(_);
-            // log("${xyz!.toJson()}");
           },
           onMapLoadComplete: (controller) async {
             galliMethods.animateMapMove(
                 LatLng(27.709857, 85.339195), 18, this, mounted, controller);
           },
           showCurrentLocation: true,
-          // onTap: (tap) {
-          //   galliMethods.reverse(tap);
-          // },
           onMapUpdate: (event) {},
           circles: [
             GalliCircle(
@@ -187,14 +183,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   onTap: () async {
                     // galliMethods.animateMapMove(LatLng(28.684222, 85.303778),
                     //     16, this, mounted, controller.map);
-                    // Get.to(TestPage());
-                    log(controller.map.center.toString());
-                    FeatureModel? feature = await galliMethods.search(
-                        "pashupatinath", controller.map.center);
-                    LatLng dest = feature!.geometry!.coordinates!.first;
-                    log(dest.toString());
-                    await galliMethods.animateMapMove(
-                        dest, 16, this, mounted, controller.map);
+                    Get.to(TestPage());
+                    // FeatureModel? data = await galliMethods.search(
+                    //     "abc", controller.initialPosition!);
+                    // log(data!.geometry!.listOfCoordinates.toString());
                   },
                   child: Container(
                     width: 32,
