@@ -16,7 +16,11 @@ class GalliMethods {
       String query, LatLng? location) async {
     var response = await geoApi.get(
         galliUrl.autoComplete(
-            query, accessToken, LatLng(location!.latitude, location.longitude)),
+            query,
+            accessToken,
+            location == null
+                ? null
+                : LatLng(location.latitude, location.longitude)),
         accessToken);
     List<AutoCompleteModel> autoCompleteResults = [];
     if (response != [] && response != null) {
