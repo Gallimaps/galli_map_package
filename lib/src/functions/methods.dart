@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:galli_map/src/functions/api.dart';
-
 import 'package:galli_map/src/static/url.dart';
 import 'package:galli_map/src/utils/location.dart';
 
@@ -18,9 +17,9 @@ class GalliMethods {
         galliUrl.autoComplete(
             query,
             accessToken,
-            location == null
-                ? null
-                : LatLng(location.latitude, location.longitude)),
+            location != null
+                ? LatLng(location.latitude, location.longitude)
+                : null),
         accessToken);
     List<AutoCompleteModel> autoCompleteResults = [];
     if (response != [] && response != null) {

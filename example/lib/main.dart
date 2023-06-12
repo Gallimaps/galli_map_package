@@ -1,10 +1,5 @@
-import 'dart:developer';
-
-import 'package:example/key_constant.dart';
-import 'package:example/test.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
-import 'package:get/get.dart';
 
 void main() {
   // runApp(DevicePreview(
@@ -20,7 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: 'Galli Package',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -40,19 +35,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: KeyConstant.key,
+    authKey: "key",
     zoom: 16,
     maxZoom: 22,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
+  final GalliMethods galliMethods = GalliMethods("key");
 
   final Three60Marker three60Marker = Three60Marker(
     on360MarkerTap: () {},
   );
   final ViewerClass viewer = ViewerClass(
     viewer: Viewer(
-        accessToken: KeyConstant.key,
+        accessToken: "key",
         pinIcon: const Icon(
           Icons.circle,
           size: 48,
@@ -183,10 +178,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   onTap: () async {
                     // galliMethods.animateMapMove(LatLng(28.684222, 85.303778),
                     //     16, this, mounted, controller.map);
-                    Get.to(TestPage());
-                    // FeatureModel? data = await galliMethods.search(
-                    //     "abc", controller.initialPosition!);
-                    // log(data!.geometry!.listOfCoordinates.toString());
                   },
                   child: Container(
                     width: 32,
