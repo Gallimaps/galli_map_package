@@ -113,3 +113,7 @@
 ## 1.1.0
 
 * modified nullables and null safety
+
+## 1.1.1
+
+* autocomplete api with and without location
