@@ -11,15 +11,10 @@ enum Three60Type { focused, near }
 class GalliMethods {
   final String accessToken;
   GalliMethods(this.accessToken);
-  Future<List<AutoCompleteModel>> autoComplete(
-      String query, LatLng? location) async {
+  Future<List<AutoCompleteModel>> autoComplete(String query,
+      {LatLng? location}) async {
     var response = await geoApi.get(
-        galliUrl.autoComplete(
-            query,
-            accessToken,
-            location != null
-                ? LatLng(location.latitude, location.longitude)
-                : null),
+        galliUrl.autoComplete(query, accessToken, latlng: location),
         accessToken);
     List<AutoCompleteModel> autoCompleteResults = [];
     if (response != [] && response != null) {

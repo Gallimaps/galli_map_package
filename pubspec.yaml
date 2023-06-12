@@ -1,6 +1,6 @@
 name: galli_map
 description: A Galli map widget that displays a map with custom markers, lines, circles and polygons. 
-version: 1.1.1
+version: 1.1.2
 homepage: https://www.gallimaps.com
 
 environment:

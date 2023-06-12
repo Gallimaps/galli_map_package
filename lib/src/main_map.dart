@@ -125,7 +125,8 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
           typingWaiter!.cancel();
           List<AutoCompleteModel> tempData = await galliMethods!.autoComplete(
               search.search.text,
-              LatLng(currentLocation!.latitude, currentLocation!.longitude));
+              location: LatLng(
+                  currentLocation!.latitude, currentLocation!.longitude));
           List<AutoCompleteModel> data = tempData.toSet().toList();
           if (data.isNotEmpty) {
             autocompleteResults = data;
