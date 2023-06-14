@@ -60,7 +60,7 @@ class GalliMap extends StatefulWidget {
         three60MarkerSize: 40,
         show360ImageOnMarkerClick: true,
         three60Widget: Three60Icon(),
-        on360MarkerTap: null,
+        // on360MarkerTap: ,
       )})
       : super(key: key);
 
