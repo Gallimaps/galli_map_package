@@ -118,6 +118,6 @@
 
 * autocomplete api with and without location
 
-## 1.1.1
+## 1.1.2
 
 * autocomplete api with empty location parameter

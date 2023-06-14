@@ -1,7 +1,7 @@
 import 'package:latlong2/latlong.dart';
 
 class GalliUrl {
-  final String imageUrl = "https://image-init.gallimap.com";
+  final String imageUrl = "https://image.gallimap.com";
   final String geoUrl = "https://route-init.gallimap.com";
 
   String param(String accessToken) => "?accessToken=$accessToken";
