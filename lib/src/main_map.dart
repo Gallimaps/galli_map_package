@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
@@ -60,7 +61,7 @@ class GalliMap extends StatefulWidget {
         three60MarkerSize: 40,
         show360ImageOnMarkerClick: true,
         three60Widget: Three60Icon(),
-        // on360MarkerTap: ,
+        // on360MarkerTap: null,
       )})
       : super(key: key);
 
@@ -298,13 +299,14 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                           point: LatLng(image.lat!, image.lng!),
                           builder: (_) => GestureDetector(
                                 onTap: () {
+                                  log("encrypt : ${image.folder}/${image.image}  \n ===  ${(encrypt("${image.folder}/${image.image}"))}");
                                   String data =
                                       encrypt("${image.folder}/${image.image}");
+                                  // log(data);
                                   if (widget.three60marker.on360MarkerTap !=
                                       null) {
-                                    widget.three60marker.on360MarkerTap!();
-                                  }
-                                  if (widget.three60marker
+                                    widget.three60marker.on360MarkerTap!(data);
+                                  } else if (widget.three60marker
                                       .show360ImageOnMarkerClick) {
                                     showDialog(
                                         context: context,

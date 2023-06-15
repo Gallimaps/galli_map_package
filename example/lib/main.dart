@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:example/key_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
@@ -43,23 +45,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   );
   final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
 
-  final Three60Marker three60Marker = Three60Marker(
-    on360MarkerTap: () {},
-  );
-  final ViewerClass viewer = ViewerClass(
-    viewer: Viewer(
-        accessToken: KeyConstant.key,
-        pinIcon: const Icon(
-          Icons.circle,
-          size: 48,
-        ),
-        animSpeed: 2,
-        height: 300,
-        width: 300,
-        onSaved: (x, y) {}),
-    viewerPosition: const Offset(32, 32),
-  );
-
   @override
   void initState() {
     super.initState();
@@ -73,6 +58,22 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: GalliMap(
+          three60marker: Three60Marker(
+            on360MarkerTap: (image) async {
+              log("message");
+
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => Scaffold(
+                        appBar: AppBar(),
+                        body: Center(
+                          child: Viewer(
+                            accessToken: controller.authKey,
+                            image: image,
+                          ),
+                        ),
+                      )));
+            },
+          ),
           controller: controller,
           onTap: (_) async {
             // HouseModel? house = await galliMethods.reverse(_);
