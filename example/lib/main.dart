@@ -38,12 +38,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: KeyConstant.key,
+    authKey: "key",
     zoom: 16,
     maxZoom: 22,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
+  final GalliMethods galliMethods = GalliMethods("key");
 
   @override
   void initState() {
@@ -60,8 +60,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         child: GalliMap(
           three60marker: Three60Marker(
             on360MarkerTap: (image) async {
-              log("message");
-
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (_) => Scaffold(
                         appBar: AppBar(),

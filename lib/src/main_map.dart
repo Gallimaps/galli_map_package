@@ -61,7 +61,6 @@ class GalliMap extends StatefulWidget {
         three60MarkerSize: 40,
         show360ImageOnMarkerClick: true,
         three60Widget: Three60Icon(),
-        // on360MarkerTap: null,
       )})
       : super(key: key);
 
@@ -183,16 +182,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
       search = SearchClass(
         searchWidth: 340,
         searchHeight: 40,
-        onTapAutoComplete: (AutoCompleteModel model) async {
-          // String location = model.name.toString();
-          // var current = await galliMethods!.getCurrentLocation();
-          // LatLng mylocation = LatLng(current.latitude, current.longitude);
-
-          // // log("name $location, value  ${mylocation.toJson()}");
-          // Future<FeatureModel?> result =
-          //     galliMethods!.search(location, mylocation);
-          //     await galliMethods.animateMapMove(, 18, this, mounted, map)
-        },
+        onTapAutoComplete: (AutoCompleteModel model) async {},
       );
     }
     galliMethods = GalliMethods(widget.controller.authKey);
@@ -299,10 +289,8 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                           point: LatLng(image.lat!, image.lng!),
                           builder: (_) => GestureDetector(
                                 onTap: () {
-                                  log("encrypt : ${image.folder}/${image.image}  \n ===  ${(encrypt("${image.folder}/${image.image}"))}");
                                   String data =
                                       encrypt("${image.folder}/${image.image}");
-                                  // log(data);
                                   if (widget.three60marker.on360MarkerTap !=
                                       null) {
                                     widget.three60marker.on360MarkerTap!(data);

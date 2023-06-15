@@ -112,10 +112,6 @@ class _ViewerState extends State<Viewer> {
 
   @override
   void initState() {
-    print(widget.image);
-    print("decrypt - ${decrypt(widget.image!)}");
-    print(
-        "https://image-init.gallimap.com/api/v1/streetview/${decrypt(widget.image!)}${galliUrl.param(widget.accessToken)}");
     if (widget.animation != null && !widget.animation!) {
       speed = 0.0;
     } else if (widget.animSpeed != null) {

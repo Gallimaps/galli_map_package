@@ -121,3 +121,7 @@
 ## 1.1.2
 
 * autocomplete api with empty location parameter
+
+## 1.1.3
+
+* three60 class updated with custom tap function

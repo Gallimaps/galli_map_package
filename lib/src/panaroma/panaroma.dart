@@ -3,7 +3,6 @@ import 'dart:ui' as ui;
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
-// import 'package:galli_motion_sensors/galli_motion_sensors.dart';
 
 enum SensorControl {
   /// No sensor used.
