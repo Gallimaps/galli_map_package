@@ -125,3 +125,7 @@
 ## 1.1.3
 
 * three60 class updated with custom tap function
+
+## 1.1.4
+
+* init- zoom resolved

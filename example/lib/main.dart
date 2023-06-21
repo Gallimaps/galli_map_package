@@ -38,12 +38,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: "key",
+    authKey: KeyConstant.key,
     zoom: 16,
-    maxZoom: 22,
+    maxZoom: 22.0,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods("key");
+  final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
 
   @override
   void initState() {
@@ -77,6 +77,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             // HouseModel? house = await galliMethods.reverse(_);
             // log("${house!.toJson()}");
             // log("$_");
+            log("zoom ${controller.map.zoom}");
           },
           onMapLoadComplete: (controller) async {
             galliMethods.animateMapMove(

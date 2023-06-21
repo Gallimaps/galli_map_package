@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
@@ -255,9 +254,9 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                   },
                   interactiveFlags: InteractiveFlag.all,
                   center: widget.controller.initialPosition ?? center,
-                  maxZoom: (widget.controller.maxZoom < 22)
+                  maxZoom: (widget.controller.maxZoom < 18)
                       ? widget.controller.maxZoom
-                      : 22,
+                      : 18,
                   minZoom: widget.controller.minZoom,
                   zoom: widget.controller.zoom),
               children: [

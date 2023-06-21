@@ -11,7 +11,7 @@ class GalliController {
   GalliController({
     required this.authKey,
     this.zoom = 16,
-    this.maxZoom = 18,
+    this.maxZoom = 18.0,
     this.minZoom = 10,
     this.initialPosition,
   });
