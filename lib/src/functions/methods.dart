@@ -79,8 +79,8 @@ class GalliMethods {
   Future<List<ImageModel>> get360ImagePoints(
       MapController mapController) async {
     String? three60ImagesString = await imageApi.get(
-        galliUrl.get360Points(mapController.bounds!.southWest!,
-            mapController.bounds!.northEast!, mapController.zoom, accessToken),
+        galliUrl.get360Points(mapController.bounds!.southWest,
+            mapController.bounds!.northEast, mapController.zoom, accessToken),
         accessToken);
     List<ImageModel> three60ImageModel = [];
     if (three60ImagesString != null) {

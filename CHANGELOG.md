@@ -129,3 +129,7 @@
 ## 1.1.4
 
 * init- zoom resolved
+
+## 1.1.5
+
+* updated all dependencies 
