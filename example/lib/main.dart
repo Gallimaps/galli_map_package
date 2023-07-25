@@ -1,14 +1,8 @@
-import 'dart:developer';
-
 import 'package:example/key_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
 
 void main() {
-  // runApp(DevicePreview(
-  //   enabled: false,
-  //   builder: (context) => const MyApp(),
-  // ));
   runApp(const MyApp());
 }
 
@@ -77,7 +71,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             // HouseModel? house = await galliMethods.reverse(_);
             // log("${house!.toJson()}");
             // log("$_");
-            log("zoom ${controller.map.zoom}");
           },
           onMapLoadComplete: (controller) async {
             galliMethods.animateMapMove(
@@ -177,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 right: 64,
                 child: GestureDetector(
                   onTap: () async {
-                    // galliMethods.animateMapMove(LatLng(28.684222, 85.303778),
+                    // galliMethods.animateMapMove(LatLng(27.689079, 85.321168),
                     //     16, this, mounted, controller.map);
                   },
                   child: Container(

@@ -133,3 +133,7 @@
 ## 1.1.5
 
 * updated all dependencies 
+
+## 1.1.6
+
+* Map vector updated 

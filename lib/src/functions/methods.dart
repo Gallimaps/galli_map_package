@@ -46,17 +46,13 @@ class GalliMethods {
     }
   }
 
-  Future<ReverseGeocodingModel?> reverse(LatLng latLng) async {
+  Future<ReverseGeocodingModel> reverse(LatLng latLng) async {
     var response = await geoApi.get(
         galliUrl.reverseGeoCode(latLng, accessToken), accessToken);
-    if (response != null) {
-      var data = jsonDecode(response)["data"];
-      ReverseGeocodingModel house = ReverseGeocodingModel.fromJson(data);
-      print("House: ${house.toJson()}");
-      return house;
-    } else {
-      return null;
-    }
+    var data = jsonDecode(response)["data"];
+    ReverseGeocodingModel house = ReverseGeocodingModel.fromJson(data);
+    print("House: ${house.toJson()}");
+    return house;
   }
 
   Future<RouteInfo?> getRoute({
