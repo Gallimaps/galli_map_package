@@ -52,7 +52,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: GalliMap(
+          loadingWidget: Text("loading"),
           three60marker: Three60Marker(
+            three60MarkerColor: Colors.blue,
+            show360ImageOnMarkerClick: true,
             on360MarkerTap: (image) async {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (_) => Scaffold(

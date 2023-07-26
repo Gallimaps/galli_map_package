@@ -22,6 +22,7 @@ class GalliMap extends StatefulWidget {
   final List<GalliCircle> circles;
   final List<GalliPolygon> polygons;
   final Widget? currentLocationWidget;
+  final Widget? loadingWidget;
   final GalliController controller;
   final SearchClass? search;
   final ViewerClass? viewer;
@@ -55,6 +56,7 @@ class GalliMap extends StatefulWidget {
       this.onMapUpdate,
       this.markerClusterWidget,
       this.search,
+      this.loadingWidget,
       this.viewer,
       this.three60marker = const Three60Marker(
         three60MarkerSize: 40,
@@ -202,11 +204,12 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
       height: widget.height ?? MediaQuery.of(context).size.height,
       child: currentLocation == null &&
               widget.controller.initialPosition == null
-          ? const Center(
-              child: CircularProgressIndicator(
-                color: Color(0xff454545),
-              ),
-            )
+          ? widget.loadingWidget ??
+              const Center(
+                child: CircularProgressIndicator(
+                  color: Color(0xff454545),
+                ),
+              )
           : FlutterMap(
               mapController: widget.controller.map,
               options: MapOptions(
@@ -263,7 +266,8 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                 TileLayer(
                     tileProvider: CachedTileProvider(),
                     urlTemplate:
-                        "https://maps.gallimap.com/styles/light/{z}/{x}/{y}.png?accessToken=${widget.controller.authKey}"),
+                        // "https://maps.gallimap.com/styles/light/{z}/{x}/{y}.png?accessToken=${widget.controller.authKey}",
+                        "https://maps.gallimap.com/styles/light/{z}/{x}/{y}@3x.png"),
                 PolylineLayer(polylines: [
                   for (GalliLine line in widget.lines) line.toPolyline(),
                 ]),
@@ -281,7 +285,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                   markers: [
                     for (ImageModel image in images)
                       Marker(
-                          height: widget.three60marker.three60MarkerSize,
+                          height: widget.three60marker.three60MarkerSize ?? 20,
                           point: LatLng(image.lat!, image.lng!),
                           builder: (_) => GestureDetector(
                                 onTap: () {
@@ -291,7 +295,8 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                       null) {
                                     widget.three60marker.on360MarkerTap!(data);
                                   } else if (widget.three60marker
-                                      .show360ImageOnMarkerClick) {
+                                          .show360ImageOnMarkerClick ??
+                                      true) {
                                     showDialog(
                                         context: context,
                                         builder: (context) {
@@ -344,7 +349,10 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                       color: Colors.white,
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                          width: 2, color: Colors.orange)),
+                                          width: 2,
+                                          color: widget.three60marker
+                                                  .three60MarkerColor ??
+                                              Colors.orange)),
                                 ),
                               )),
                   ],

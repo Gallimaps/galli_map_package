@@ -137,3 +137,7 @@
 ## 1.1.6
 
 * Map vector updated 
+
+## 1.1.7
+
+* Minor Bug Fixes
