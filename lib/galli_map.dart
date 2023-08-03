@@ -12,7 +12,7 @@ export './src/models/house_model.dart';
 export './src/models/image_model.dart';
 export './src/models/reversegeo_model.dart';
 export './src/functions/methods.dart';
-export './src/models/galli_controller.dart';
+export 'src/controllers/galli_controller.dart';
 export './src/widgets/viewer/galli360viewer.dart' hide LatLng;
 export 'package:latlong2/latlong.dart';
 export './src/models/viewer.dart';

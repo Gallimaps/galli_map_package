@@ -52,7 +52,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: GalliMap(
-          loadingWidget: Text("loading"),
           three60marker: Three60Marker(
             three60MarkerColor: Colors.blue,
             show360ImageOnMarkerClick: true,
@@ -71,7 +70,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           ),
           controller: controller,
           onTap: (_) async {
-            // HouseModel? house = await galliMethods.reverse(_);
+            // Position abc = await galliMethods.getCurrentLocation();
+            // log("abc ${abc.toJson()}");
+            // Stream<Position> xyz = galliMethods.streamCurrentLocation();
+            // log("xyz ${xyz.isEmpty.toString()}");
+            // // HouseModel? house = await galliMethods.reverse(_);
             // log("${house!.toJson()}");
             // log("$_");
           },

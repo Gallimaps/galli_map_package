@@ -114,7 +114,7 @@ class GalliMethods {
       locationSettings: LocationSettings(
         accuracy: LocationAccuracy.best,
         distanceFilter: 8,
-        timeLimit: Duration(milliseconds: 500),
+        // timeLimit: Duration(milliseconds: 500),
       ),
     );
   }

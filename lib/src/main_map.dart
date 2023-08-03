@@ -100,6 +100,7 @@ class Three60Icon extends StatelessWidget {
 }
 
 class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
+  StreamSubscription? streamSubscription;
   Position? currentLocation;
   bool showSearch = false;
   List<AutoCompleteModel> autocompleteResults = [];
@@ -160,7 +161,9 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
         return;
       }
       setState(() {});
-      galliMethods!.streamCurrentLocation().listen((event) {
+
+      streamSubscription =
+          galliMethods!.streamCurrentLocation().listen((event) {
         if (isFromNepal(event.toLatLng())) {
           currentLocation = event;
           if (!mounted) {
@@ -194,6 +197,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    streamSubscription!.cancel();
     super.dispose();
   }
 
@@ -266,7 +270,6 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                 TileLayer(
                     tileProvider: CachedTileProvider(),
                     urlTemplate:
-                        // "https://maps.gallimap.com/styles/light/{z}/{x}/{y}.png?accessToken=${widget.controller.authKey}",
                         "https://maps.gallimap.com/styles/light/{z}/{x}/{y}@3x.png"),
                 PolylineLayer(polylines: [
                   for (GalliLine line in widget.lines) line.toPolyline(),

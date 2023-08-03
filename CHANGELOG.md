@@ -141,3 +141,11 @@
 ## 1.1.7
 
 * Minor Bug Fixes
+
+## 1.1.8
+
+* improved vector map, custom laoding widget and 360 marker color
+
+## 1.1.9
+
+* Location timeout fix
