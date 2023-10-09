@@ -1,13 +1,14 @@
-import 'package:example/key_constant.dart';
+import 'package:example/key_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
+// import 'example/lib/key_constants.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
   // This widget is the root of your application.
   @override
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({Key? key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -32,12 +33,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: KeyConstant.key,
+    authKey: keyConstant.token,
     zoom: 16,
     maxZoom: 22.0,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
+  final GalliMethods galliMethods = GalliMethods(keyConstant.token);
 
   @override
   void initState() {

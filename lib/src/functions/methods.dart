@@ -96,7 +96,7 @@ class GalliMethods {
     if (isFromNepal(
         LatLng(currentLocation.latitude, currentLocation.longitude))) {
     } else {
-      currentLocation = const Position(
+      currentLocation = Position(
           longitude: 85.304835,
           latitude: 27.682361,
           timestamp: null,
@@ -104,7 +104,9 @@ class GalliMethods {
           altitude: 100,
           heading: 0,
           speed: 0,
-          speedAccuracy: 12);
+          speedAccuracy: 12,
+          altitudeAccuracy: 0.0,
+          headingAccuracy: 0.0);
     }
     return currentLocation;
   }
