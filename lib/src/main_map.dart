@@ -4,7 +4,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:galli_map/src/functions/cache.dart';
-import 'package:galli_map/src/functions/encrption.dart';
 import 'package:galli_map/src/utils/latlng.dart';
 import 'package:galli_map/src/utils/location.dart';
 import 'package:galli_map/src/widgets/markers/user_location_marker.dart';

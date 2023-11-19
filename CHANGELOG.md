@@ -157,3 +157,7 @@
 ## 1.2.1
 
 * image model fix
+
+## 1.2.2
+
+* Static analysis upgrade

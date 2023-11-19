@@ -104,7 +104,9 @@ class GalliMethods {
           altitude: 100,
           heading: 0,
           speed: 0,
-          speedAccuracy: 12);
+          speedAccuracy: 12,
+          altitudeAccuracy: 0.0,
+          headingAccuracy: 0.0);
     }
     return currentLocation;
   }

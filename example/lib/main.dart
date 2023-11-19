@@ -1,4 +1,4 @@
-import 'package:example/key_constant.dart';
+import 'package:example/key_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
 
@@ -32,12 +32,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   final GalliController controller = GalliController(
-    authKey: KeyConstant.key,
+    authKey: keyConstant.token,
     zoom: 16,
     maxZoom: 22.0,
     initialPosition: LatLng(27.672905, 85.312215),
   );
-  final GalliMethods galliMethods = GalliMethods(KeyConstant.key);
+  final GalliMethods galliMethods = GalliMethods(keyConstant.token);
 
   @override
   void initState() {
