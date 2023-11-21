@@ -150,18 +150,17 @@
 
 * Location timeout fix
 
+## 1.2.0
 
-## 1.2.0 
+* image model fix
 
-# image model fix
+## 1.2.1
 
-## 1.2.1 
+* image model fix
 
-# image model fix
+## 1.2.2
 
-## 1.2.2 
-
-# Static analysis upgrade
+* Static analysis upgrade
 
 ## 1.2.3
 

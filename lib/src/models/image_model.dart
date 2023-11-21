@@ -1,3 +1,5 @@
+import 'package:galli_map/src/functions/encrption.dart';
+
 class ImageModel {
   String? image;
   double? lat;
@@ -8,11 +10,11 @@ class ImageModel {
   ImageModel({this.image, this.lat, this.lng, this.folder, this.location});
 
   ImageModel.fromJson(Map<String, dynamic> json) {
-    image = json['image'];
     lat = json['lat'] is String ? double.tryParse(json['lat']) : json['lat'];
     lng = json['lng'] is String ? double.tryParse(json['lng']) : json['lng'];
     folder = json['folder'];
     location = json['location'];
+    image = encrypt("${json['folder']}/${json['image']}");
   }
 
   Map<String, dynamic> toJson() {

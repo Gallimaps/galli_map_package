@@ -4,7 +4,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 import 'package:galli_map/galli_map.dart';
 import 'package:galli_map/src/functions/cache.dart';
-import 'package:galli_map/src/functions/encrption.dart';
 import 'package:galli_map/src/utils/latlng.dart';
 import 'package:galli_map/src/utils/location.dart';
 import 'package:galli_map/src/widgets/markers/user_location_marker.dart';
@@ -268,10 +267,9 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                   zoom: widget.controller.zoom),
               children: [
                 TileLayer(
-                  tileProvider: CachedTileProvider(),
-                  urlTemplate:
-                      "https://maps.gallimap.com/styles/light/{z}/{x}/{y}@3x.png",
-                ),
+                    tileProvider: CachedTileProvider(),
+                    urlTemplate:
+                        "https://maps.gallimap.com/styles/light/{z}/{x}/{y}@3x.png"),
                 PolylineLayer(polylines: [
                   for (GalliLine line in widget.lines) line.toPolyline(),
                 ]),
@@ -293,11 +291,10 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                           point: LatLng(image.lat!, image.lng!),
                           builder: (_) => GestureDetector(
                                 onTap: () {
-                                  String data =
-                                      encrypt("${image.folder}/${image.image}");
                                   if (widget.three60marker.on360MarkerTap !=
                                       null) {
-                                    widget.three60marker.on360MarkerTap!(data);
+                                    widget.three60marker
+                                        .on360MarkerTap!(image.image!);
                                   } else if (widget.three60marker
                                           .show360ImageOnMarkerClick ??
                                       true) {
@@ -314,7 +311,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                             child: Stack(children: [
                                               widget.viewer?.viewer == null
                                                   ? Viewer(
-                                                      image: data,
+                                                      image: image.image,
                                                       accessToken: widget
                                                           .controller.authKey,
                                                     )
@@ -324,7 +321,8 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                                       ? Viewer.fromViewer(
                                                           oldViewer: widget
                                                               .viewer!.viewer!,
-                                                          newIimage: data)
+                                                          newIimage:
+                                                              image.image!)
                                                       : Positioned(
                                                           top: widget
                                                               .viewer!
@@ -338,7 +336,8 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                                                               oldViewer: widget
                                                                   .viewer!
                                                                   .viewer!,
-                                                              newIimage: data),
+                                                              newIimage:
+                                                                  image.image!),
                                                         )
                                             ]),
                                           );
