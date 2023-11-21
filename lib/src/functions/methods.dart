@@ -99,7 +99,7 @@ class GalliMethods {
       currentLocation = Position(
           longitude: 85.304835,
           latitude: 27.682361,
-          timestamp: null,
+          timestamp: DateTime.now(),
           accuracy: 12,
           altitude: 100,
           heading: 0,
