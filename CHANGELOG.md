@@ -149,3 +149,20 @@
 ## 1.1.9
 
 * Location timeout fix
+
+
+## 1.2.0 
+
+# image model fix
+
+## 1.2.1 
+
+# image model fix
+
+## 1.2.2 
+
+# Static analysis upgrade
+
+## 1.2.3
+
+# null safety fix
