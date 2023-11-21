@@ -268,9 +268,11 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                   zoom: widget.controller.zoom),
               children: [
                 TileLayer(
-                    tileProvider: CachedTileProvider(),
-                    urlTemplate:
-                        "https://maps.gallimap.com/styles/light/{z}/{x}/{y}@3x.png"),
+                  tileProvider: CachedTileProvider(),
+                  urlTemplate:
+                      // "https://maps.gallimap.com/styles/light/{z}/{x}/{y}@3x.png",
+                      "http://192.168.1.73:8080/mapserver/styles/light/{z}/{x}/{y}@3x.png",
+                ),
                 PolylineLayer(polylines: [
                   for (GalliLine line in widget.lines) line.toPolyline(),
                 ]),
