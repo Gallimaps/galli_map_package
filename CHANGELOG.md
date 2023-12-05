@@ -165,3 +165,7 @@
 ## 1.2.3
 
 * null safety fix
+
+## 1.2.4
+
+* updated map
