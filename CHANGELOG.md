@@ -164,4 +164,4 @@
 
 ## 1.2.3
 
-# null safety fix
+* null safety fix

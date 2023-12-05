@@ -97,16 +97,17 @@ class GalliMethods {
         LatLng(currentLocation.latitude, currentLocation.longitude))) {
     } else {
       currentLocation = Position(
-          longitude: 85.304835,
-          latitude: 27.682361,
-          timestamp: DateTime.now(),
-          accuracy: 12,
-          altitude: 100,
-          heading: 0,
-          speed: 0,
-          speedAccuracy: 12,
-          altitudeAccuracy: 0.0,
-          headingAccuracy: 0.0);
+        longitude: 85.304835,
+        latitude: 27.682361,
+        timestamp: DateTime.now(),
+        accuracy: 12,
+        altitude: 100,
+        heading: 0,
+        speed: 0,
+        speedAccuracy: 12,
+        altitudeAccuracy: 0.0,
+        headingAccuracy: 0.0,
+      );
     }
     return currentLocation;
   }
