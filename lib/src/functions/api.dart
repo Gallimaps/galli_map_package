@@ -1,17 +1,23 @@
+import 'dart:developer';
+
 import 'package:galli_map/src/static/url.dart';
 import 'package:http/http.dart' as http;
+import 'package:package_info_plus/package_info_plus.dart';
 
 class GalliApi {
   final String baseUrl;
+
   GalliApi({required this.baseUrl});
 
   Future get(String url, String accessToken) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    var packageName = packageInfo.packageName;
     var response = await http.get(
       Uri.parse("$baseUrl$url"),
       headers: <String, String>{
         'Accept': 'application/json',
         'Content-Type': 'application/json; charset=UTF-8',
-        'Referer': "gallimaps.com",
+        'User-agent': packageName,
       },
     ).timeout(
       const Duration(seconds: 8),

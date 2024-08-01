@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:example/key_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:galli_map/galli_map.dart';
@@ -70,13 +72,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           ),
           controller: controller,
           onTap: (_) async {
-            // Position abc = await galliMethods.getCurrentLocation();
-            // log("abc ${abc.toJson()}");
-            // Stream<Position> xyz = galliMethods.streamCurrentLocation();
-            // log("xyz ${xyz.isEmpty.toString()}");
-            // // HouseModel? house = await galliMethods.reverse(_);
-            // log("${house!.toJson()}");
-            // log("$_");
+            //action to be performed when the map is tapped.
           },
           onMapLoadComplete: (controller) async {
             galliMethods.animateMapMove(
@@ -178,6 +174,22 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   onTap: () async {
                     // galliMethods.animateMapMove(LatLng(27.689079, 85.321168),
                     //     16, this, mounted, controller.map);
+
+                    List<AutoCompleteModel> abc =
+                        await galliMethods.autoComplete("burge");
+                    log("autocomplete result --");
+                    for (var i in abc) {
+                      log(i.toJson().toString());
+                    }
+                    FeatureModel? searchabc = await galliMethods.search(
+                        "burge", controller.map.center);
+                    log("search result --");
+                    log(searchabc!.toJson().toString());
+
+                    ReverseGeocodingModel reverseabc =
+                        await galliMethods.reverse(controller.map.center);
+                    log("reverse result --");
+                    log(reverseabc.toJson().toString());
                   },
                   child: Container(
                     width: 32,

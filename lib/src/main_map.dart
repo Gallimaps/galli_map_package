@@ -270,7 +270,7 @@ class _GalliMapState extends State<GalliMap> with TickerProviderStateMixin {
                   tileProvider: CachedTileProvider(),
                   urlTemplate:
                       // "https://maps.gallimap.com/styles/light/{z}/{x}/{y}@3x.png",
-                      "https://map-init.gallimap.com/styles/light/{z}/{x}/{y}@3x.png",
+                      "https://map-init.gallimap.com/styles/light/{z}/{x}/{y}@3x.png?accessToken=${widget.controller.authKey}",
                 ),
                 PolylineLayer(polylines: [
                   for (GalliLine line in widget.lines) line.toPolyline(),
